@@ -1,0 +1,96 @@
+# Makefile variables for PO directory in any package using GNU gettext.
+
+# Usually the message domain is the same as the package name.
+DOMAIN = gnupg2
+
+# These two variables depend on the location of this directory.
+subdir = po
+top_builddir = ..
+
+# These options get passed to xgettext.
+XGETTEXT_OPTIONS = \
+        --keyword=_ --keyword=N_ --keyword=L_ \
+        --flag=gcry_log_debug:1:c-format   \
+        --flag=gpgrt_fprintf:2:c-format   \
+        --flag=gpgrt_fprintf_unlocked:2:c-format   \
+        --flag=gpgrt_printf:1:c-format   \
+        --flag=gpgrt_printf_unlocked:1:c-format   \
+        --flag=gpgrt_vfprintf:2:c-format   \
+        --flag=gpgrt_vfprintf_unlocked:2:c-format   \
+        --flag=gpgrt_asprintf:2:c-format   \
+        --flag=gpgrt_vasprintf:2:c-format   \
+        --flag=gpgrt_bsprintf:1:c-format   \
+        --flag=gpgrt_vbsprintf:1:c-format   \
+        --flag=gpgrt_snprintf:3:c-format   \
+        --flag=gpgrt_vsnprintf:3:c-format   \
+        --flag=gpgrt_log:2:c-format   \
+        --flag=gpgrt_log_bug:1:c-format   \
+        --flag=gpgrt_log_fatal:1:c-format   \
+        --flag=gpgrt_log_error:1:c-format   \
+        --flag=gpgrt_log_info:1:c-format   \
+        --flag=gpgrt_log_debug:1:c-format   \
+        --flag=gpgrt_log_debug_string:2:c-format   \
+        --flag=gpgrt_log_printf:1:c-format   \
+        --flag=gpgrt_log_printhex:3:c-format   \
+        --flag=gpgrt_log_clock:1:c-format   \
+        --flag=log_log:2:c-format   \
+        --flag=log_bug:1:c-format   \
+        --flag=log_fatal:1:c-format   \
+        --flag=log_error:1:c-format   \
+        --flag=log_info:1:c-format   \
+        --flag=log_debug:1:c-format   \
+        --flag=log_debug_string:2:c-format   \
+        --flag=log_printf:1:c-format   \
+        --flag=log_printhex:3:c-format   \
+        --flag=log_clock:1:c-format
+        --flag=put_membuf_printf:2:c-format   \
+        --flag=tty_printf:1:c-format   \
+        --flag=tty_fprintf:2:c-format   \
+        --flag=tty_getf:1:c-format   \
+        --flag=writeout_para:2:c-format   \
+        --flag=writeout_li:3:c-format   \
+        --flag=writeout_rem:2:c-format   \
+        --flag=xasprintf:1:c-format   \
+        --flag=xtryasprintf:1:c-format   \
+        --flag=log_debug_with_string:2:c-format   \
+        --flag=print_assuan_status:3:c-format    \
+        --flag=vprint_assuan_status:3:c-format   \
+	--flag=agent_print_status:3:c-format     \
+	--flag=dirmngr_status_helpf:2:c-format   \
+	--flag=dirmngr_status_printf:3:c-format  \
+	--flag=ks_printf_help:2:c-format         \
+	--flag=print_further_info:1:c-format     \
+	--flag=write_status_printf:2:c-format    \
+	--flag=gpgconf_write_status:2:c-format   \
+        --flag=send_status_printf:3:c-format     \
+	--flag=wks_write_status:2:c-format
+
+# This is the copyright holder that gets inserted into the header of the
+# $(DOMAIN).pot file.  Set this to the copyright holder of the surrounding
+# package.  (Note that the msgstr strings, extracted from the package's
+# sources, belong to the copyright holder of the package.)  Translators are
+# expected to transfer the copyright for their translations to this person
+# or entity, or to disclaim their copyright.  The empty string stands for
+# the public domain; in this case the translators are expected to disclaim
+# their copyright.
+COPYRIGHT_HOLDER = Free Software Foundation, Inc.
+
+# This is the email address or URL to which the translators shall report
+# bugs in the untranslated strings:
+# - Strings which are not entire sentences, see the maintainer guidelines
+#   in the GNU gettext documentation, section 'Preparing Strings'.
+# - Strings which use unclear terms or require additional context to be
+#   understood.
+# - Strings which make invalid assumptions about notation of date, time or
+#   money.
+# - Pluralisation problems.
+# - Incorrect English spelling.
+# - Incorrect formatting.
+# It can be your email address, or a mailing list address where translators
+# can write to without being subscribed, or the URL of a web page through
+# which the translators can contact you.
+MSGID_BUGS_ADDRESS = translations@gnupg.org
+
+# This is the list of locale categories, beyond LC_MESSAGES, for which the
+# message catalogs shall be used.  It is usually empty.
+EXTRA_LOCALE_CATEGORIES =
