@@ -1,0 +1,36 @@
+.TH GPG-CHECK-PATTERN "1" "March 2016" "gpg-check-pattern (GnuPG) 2.1.11" "User Commands"
+
+.SH NAME
+gpg-check-pattern \- Check a passphrase on stdin against the patternfile
+
+.SH SYNOPSIS
+.B gpg\-check\-pattern
+.RI [ options ]
+.I patternfile
+
+.SH DESCRIPTION
+.B gpg\-check\-pattern
+checks a passphrase given on stdin against a specified patternfile.
+
+.SH OPTIONS
+.TP
+.BR \-v ", " \-\-verbose
+Produce verbose output
+.TP
+.B \-\-check
+run only a syntax check on the patternfile
+.TP
+.BR \-0 ",  " \-\-null
+input is expected to be null delimited
+.PP
+Please report bugs to <https://dev.gnupg.org>.
+
+.SH COPYRIGHT
+Copyright \(co 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+This manpage was written by \fBDaniel Kahn Gillmor\fR for the Debian
+distribution (but may be used by others).

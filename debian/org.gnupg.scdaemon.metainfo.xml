@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <id>org.gnupg.scdaemon</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>scdaemon</name>
+  <summary>USB SmartCard Readers</summary>
+  <description>
+    <p>
+      GnuPG's scdaemon provides access to USB tokens and smartcard
+      readers that provide cryptographic functionality (e.g. use of
+      protected secret keys).
+    </p>
+  </description>
+  <provides>
+    <modalias>usb:v046Ap0005d*</modalias>
+    <modalias>usb:v046Ap0010d*</modalias>
+    <modalias>usb:v046Ap003Ed*</modalias>
+    <modalias>usb:v04E6p5111d*</modalias>
+    <modalias>usb:v04E6p5115d*</modalias>
+    <modalias>usb:v04E6p5116d*</modalias>
+    <modalias>usb:v04E6p5117d*</modalias>
+    <modalias>usb:v04E6pE001d*</modalias>
+    <modalias>usb:v04E6pE003d*</modalias>
+    <modalias>usb:v058Fp9540d*</modalias>
+    <modalias>usb:v076Bp3821d*</modalias>
+    <modalias>usb:v076Bp6622d*</modalias>
+    <modalias>usb:v08E6p3437d*</modalias>
+    <modalias>usb:v08E6p3438d*</modalias>
+    <modalias>usb:v08E6p3478d*</modalias>
+    <modalias>usb:v08E6p34C2d*</modalias>
+    <modalias>usb:v08E6p34ECd*</modalias>
+    <modalias>usb:v0BF8p1006d*</modalias>
+    <modalias>usb:v0C4Bp0500d*</modalias>
+    <modalias>usb:v0D46p2012d*</modalias>
+    <modalias>usb:v1050p0111d*</modalias>
+    <modalias>usb:v1050p0112d*</modalias>
+    <modalias>usb:v1050p0115d*</modalias>
+    <modalias>usb:v1050p0116d*</modalias>
+    <modalias>usb:v1050p0404d*</modalias>
+    <modalias>usb:v1050p0405d*</modalias>
+    <modalias>usb:v1050p0406d*</modalias>
+    <modalias>usb:v1050p0407d*</modalias>
+    <modalias>usb:v1A44p0920d*</modalias>
+    <modalias>usb:v1FC9p81E6d*</modalias>
+    <modalias>usb:v20A0p4107d*</modalias>
+    <modalias>usb:v20A0p4108d*</modalias>
+    <modalias>usb:v20A0p4109d*</modalias>
+    <modalias>usb:v20A0p4211d*</modalias>
+    <modalias>usb:v234Bp0000d*</modalias>
+    <modalias>usb:v316Dp4C4Bd*</modalias>
+    <modalias>usb:v1209p2440d*</modalias>
+  </provides>
+</component>

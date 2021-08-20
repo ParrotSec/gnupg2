@@ -1,0 +1,19 @@
+gnupg-agent (2.1.18-1) unstable; urgency=medium
+
+  If your machine is configured with system user session management,
+  gpg-agent will be managed automatically by systemd's user sessions on
+  machines configured with use systemd.  Please consider installing the
+  packages that the gnupg-agent package Suggests:, and see
+  /usr/share/doc/gnupg-agent/README.Debian for more details.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 23 Jan 2017 22:54:48 -0500
+
+gnupg-agent (2.1.13-3) experimental; urgency=medium
+
+  gpg-agent is no longer auto-launched by
+  /etc/X11/Xsession.d/90gpg-agent.  Please read
+  /usr/share/doc/gnupg-agent/README.Debian for details about system
+  integration.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 28 Jun 2016 17:29:46 -0400
+

@@ -1,0 +1,90 @@
+#!/usr/bin/make -f
+# debian/rules file - for GnuPG
+# Copyright 1994,1995 by Ian Jackson.
+# Copyright 1998-2003 by James Troup.
+# Copyright 2003-2004 by Matthias Urlichs.
+#
+# I hereby give you perpetual unlimited permission to copy,
+# modify and relicense this file, provided that you do not remove
+# my name from the file itself.  (I assert my moral right of
+# paternity under the Copyright, Designs and Patents Act 1988.)
+# This file may have to be extensively modified
+
+include /usr/share/dpkg/architecture.mk
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# avoid -pie for gpgv-static on kfreebsd-amd64, and x32
+# platforms, which cannot support it by default:
+ifeq (,$(filter $(DEB_HOST_ARCH), kfreebsd-amd64 x32))
+GPGV_STATIC_HARDENING = "-pie"
+else
+GPGV_STATIC_HARDENING = ""
+endif
+
+# Avoid parallel tests on hppa and riscv64 architecture.
+# Parallel tests generates high load on machine which causes timeouts and thus
+# triggers unexpected failures.
+ifeq (,$(filter $(DEB_HOST_ARCH), hppa riscv64))
+AUTOTEST_FLAGS = "--parallel"
+else
+AUTOTEST_FLAGS = "--no-parallel"
+endif
+
+%:
+	dh $@ --with=autoreconf --builddirectory=build
+
+GPGV_UDEB_UNNEEDED = gpgtar bzip2 gpgsm scdaemon dirmngr doc tofu exec ldap gnutls sqlite libdns
+
+WIN32_FLAGS=LDFLAGS="-Xlinker --no-insert-timestamp -static" CFLAGS="-g -Os" CPPFLAGS=
+
+override_dh_auto_configure:
+	dh_auto_configure --builddirectory=build-gpgv-udeb -- \
+	   	$(foreach x, $(GPGV_UDEB_UNNEEDED), --disable-$(x))
+	dh_auto_configure --builddirectory=build-maintainer -- \
+		--enable-maintainer-mode \
+	   	$(foreach x, $(GPGV_UDEB_UNNEEDED), --disable-$(x))
+	dh_auto_configure --builddirectory=build -- --libexecdir=\$${prefix}/lib/gnupg \
+		--enable-wks-tools \
+		--enable-all-tests \
+		--with-agent-s2k-calibration=300 \
+		--enable-large-secmem
+
+override_dh_auto_build-arch:
+	dh_auto_build --builddirectory=build-gpgv-udeb
+	dh_auto_build --builddirectory=build
+	dh_auto_build --builddirectory=build-maintainer
+	cp -a build-gpgv-udeb build-gpgv-static
+	rm -f build-gpgv-static/g10/gpgv
+	cd build-gpgv-static/g10 && $(MAKE) LDFLAGS="$$LDFLAGS $(GPGV_STATIC_HARDENING) -static" gpgv
+	mv build-gpgv-static/g10/gpgv build-gpgv-static/g10/gpgv-static
+
+override_dh_auto_build-indep:
+	mkdir -p build-gpgv-win32
+	cd build-gpgv-win32 && $(WIN32_FLAGS) ../configure \
+	   	$(foreach x, $(GPGV_UDEB_UNNEEDED), --disable-$(x)) \
+		$(foreach x, libgpg-error libgcrypt libassuan ksba npth, --with-$x-prefix=/usr/i686-w64-mingw32) \
+		--enable-gpg2-is-gpg \
+		--with-zlib=/usr/i686-w64-mingw \
+		--prefix=/usr/i686-w64-mingw32 \
+		--host i686-w64-mingw32
+	cd build-gpgv-win32/common && $(WIN32_FLAGS) $(MAKE) libcommon.a
+	cd build-gpgv-win32/common && $(WIN32_FLAGS) $(MAKE) libgpgrl.a
+	cd build-gpgv-win32/common && $(WIN32_FLAGS) $(MAKE) libsimple-pwquery.a
+	cd build-gpgv-win32/kbx && $(WIN32_FLAGS) $(MAKE) libkeybox.a
+	cd build-gpgv-win32/regexp && $(WIN32_FLAGS) $(MAKE) libregexp.a
+	cd build-gpgv-win32/g10 && $(WIN32_FLAGS) $(MAKE) gpgv.exe
+	strip build-gpgv-win32/g10/gpgv.exe
+
+
+override_dh_auto_test:
+	dh_auto_test --builddirectory=build -- verbose=3 TESTFLAGS=$(AUTOTEST_FLAGS)
+
+override_dh_shlibdeps:
+# Make ldap a recommends rather than a hard dependency.
+	dpkg-shlibdeps -Tdebian/dirmngr.substvars -dRecommends debian/dirmngr/usr/lib/gnupg/dirmngr_ldap -dDepends debian/dirmngr/usr/bin/dirmngr*
+	dh_shlibdeps -Ndirmngr
+
+# visualizations of package dependencies:
+debian/%.png: debian/%.dot
+	dot -T png -o $@ $<

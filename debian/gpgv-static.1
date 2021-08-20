@@ -1,0 +1,32 @@
+.TH GPGV-STATIC "1" "November 2016" "GnuPG" "Gnu Privacy Guard 2.1"
+
+.SH NAME
+gpgv-static - Verify OpenPGP signatures (static build)
+
+.SH SYNOPSIS
+.B gpgv-static [\fIoptions\fP] \fIsigned_files\fP
+
+.SH DESCRIPTION
+\fBgpgv\fR is an OpenPGP signature verification tool.
+
+\fBgpgv-static\fR is \fBgpgv\fR built statically so that it can be
+directly used on any platform that is running on the Linux kernel,
+such as Android, ChromeOS, or many embedded Linux systems.
+
+This version of \fBgpgv\fR in combination with \fBdebootstrap\fR and
+the Debian archive keyring allows the secure creation of chroot
+installs on these platforms by using the full Debian signature
+verification that is present in all official Debian mirrors.
+
+You may wish to re-name the binary to plain \fBgpgv\fR when
+transferring it into such a platform to create a chroot.
+
+Please read the documentation for \fBgpgv\fR for more details.
+
+.SH SEE ALSO
+\fBgpg\fR(1)
+
+.SH AUTHOR
+This manual page was written by Daniel Kahn Gillmor
+<dkg@fifthhorseman.net> for the Debian project, but may be used by
+others under the same license as GnuPG itself.

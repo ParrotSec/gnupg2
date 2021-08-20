@@ -1,0 +1,38 @@
+gnupg2 (2.2.27-2) unstable; urgency=medium
+
+  Starting with version 2.2.27-1, per-user configuration of the GnuPG
+  suite has completely moved to ~/.gnupg/gpg.conf, and ~/.gnupg/options
+  is no longer in use.  Please rename the file if necessary, or move
+  its contents to the new location.
+
+ -- Christoph Biedl <debian.axhn@manchmal.in-ulm.de>  Thu, 22 Apr 2021 20:37:45 +0200
+
+gnupg2 (2.2.17-1) unstable; urgency=medium
+
+  Upstream GnuPG now defaults to not accepting third-party certifications
+  from the keyserver network.  Given that the SKS keyserver network is
+  under attack via certificate flooding, and third-party certifications
+  will not be accepted anyway, we now ship with the more tightly-constrained
+  and abuse-resistant system hkps://keys.openpgp.org as the default
+  keyserver.
+
+  Users with bandwidth to spare who want to try their luck with the SKS
+  pool should add the following line to ~/.gnupg/dirmngr.conf to revert to
+  upstream's default keyserver:
+
+      keyserver hkps://hkps.pool.sks-keyservers.net
+
+  See the 2.2.17 section in the upstream NEWS file at
+  /usr/share/doc/gnupg/NEWS.gz for more information about fully
+  reverting to the old, risky behavior.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 11 Jul 2019 22:12:07 -0400
+
+gnupg2 (2.1.11-7+exp1) experimental; urgency=medium
+
+  The gnupg package now provides the "modern" version of GnuPG.
+
+  Please read /usr/share/doc/gnupg/README.Debian for details about the
+  transition from "classic" to "modern"
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 30 Mar 2016 09:59:35 -0400

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+set -x
+
+DIR=$(mktemp -d)
+GPG_HOME=$DIR/gnupg
+gpg="gpg --homedir $GPG_HOME"
+
+mkdir $GPG_HOME
+chmod 700 $GPG_HOME
+
+#trap "cd $HOME && rm -rf $DIR" EXIT
+
+cd $DIR
+
+cat > key-batch << EOF
+Key-Type: default
+Subkey-Type: default
+Name-Real: test case
+Name-Email: example@example.com
+Expire-Date: 0
+%no-protection
+%commit
+EOF
+
+$gpg --batch --generate-key key-batch
+$gpg -abs < $GPG_HOME/pubring.kbx > pubring.kbx.asc
+$gpg --verify pubring.kbx.asc $GPG_HOME/pubring.kbx
+gpgv --keyring $GPG_HOME/pubring.kbx pubring.kbx.asc $GPG_HOME/pubring.kbx
+
+# Encrypt
+$gpg -e -r example@example.com < $GPG_HOME/pubring.kbx > pubring.kbx.gpg
+$gpg -d -r example@example.com < pubring.kbx.gpg > pubring.kbx.gpg.dec

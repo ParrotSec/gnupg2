@@ -1,0 +1,11 @@
+Tests: gpgv-win32
+Depends: gpgv-win32, gnupg2, gpgv2, wine32, diffutils
+Restrictions: allow-stderr, skip-not-installable
+
+Tests: simple-tests
+Depends: gnupg2, gpgv2
+Restrictions: allow-stderr
+
+Tests: migration
+Depends: gpg, gnupg1, gnupg-utils, debian-archive-keyring, diffutils
+Restrictions: allow-stderr

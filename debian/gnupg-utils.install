@@ -1,0 +1,11 @@
+build-maintainer/g10/gpgcompose usr/bin
+build/tools/gpg-zip usr/bin
+debian/migrate-pubring-from-classic-gpg usr/bin
+debian/tmp/usr/bin/gpgparsemail
+debian/tmp/usr/bin/gpgtar
+debian/tmp/usr/bin/gpgsplit
+debian/tmp/usr/bin/kbxutil
+debian/tmp/usr/bin/watchgnupg
+debian/tmp/usr/sbin/addgnupghome
+debian/tmp/usr/sbin/applygnupgdefaults
+tools/lspgpot usr/bin

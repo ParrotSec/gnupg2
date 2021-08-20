@@ -1,0 +1,73 @@
+#!/usr/bin/dot
+
+# interrelationships between binary packages produced by gnupg2 source
+# package:
+
+# it would be good to graph the external dependencies as well.
+
+digraph gnupg2 {
+        # odd-duck packages:
+        node [shape=box];
+        gpgv_udeb [label="gpgv-udeb"];
+        gpgv_static [label="gpgv-static"];
+        gpgv_win32 [label="gpgv-win32"];
+
+        # meta-packages, transitional packages:
+        node [shape=diamond];
+        gnupg_agent [label="gnupg-agent"];
+        gnupg;
+        gnupg2;
+        gpgv2;
+        
+
+        node [shape=ellipse];
+        gpg_agent [label="gpg-agent"];
+        gpg_wks_server [label="gpg-wks-server"];
+        gpg_wks_client [label="gpg-wks-client"];
+        gnupg_l10n [label="gnupg-l10n"];
+        gnupg_utils [label="gnupg-utils"];
+        
+        
+        # depends:
+        edge [color=black];
+        gnupg_agent -> gpg_agent;
+        gpg_agent -> gpgconf;
+        gpg_wks_server -> gpg;
+        gpg_wks_server -> gpg_agent;
+        gpg_wks_client -> gpg;
+        gpg_wks_client -> gpg_agent;
+        gpg_wks_client -> dirmngr;
+        scdaemon -> gpg_agent;
+        gpgsm -> gpgconf;
+        gpg -> gpgconf;
+        gnupg -> dirmngr;
+        gnupg -> gnupg_l10n;
+        gnupg -> gnupg_utils;
+        gnupg -> gpg;
+        gnupg -> gpg_agent;
+        gnupg -> gpg_wks_client;
+        gnupg -> gpg_wks_server;
+        gnupg -> gpgsm;
+        gnupg -> gpgv;
+        gnupg2 -> gnupg;
+        gpgv2 -> gpgv;
+        dirmngr -> gpgconf;
+        
+
+        # recommends:
+        edge [color=red];
+        gpg_agent -> gnupg;
+        gpg_wks_server -> gnupg;
+        gpg_wks_client -> gnupg;
+        gpgsm -> gnupg;
+        gpg -> gnupg;
+        dirmngr -> gnupg;
+        gnupg_utils -> gpg;
+        gnupg_utils -> gpg_agent;
+        gnupg_utils -> gpgconf;
+        gnupg_utils -> gpgsm;
+        
+        # suggests:
+        edge [color=blue];
+        gpgv -> gnupg;
+}

@@ -1,0 +1,5 @@
+rm_conffile /etc/default/dirmngr
+rm_conffile /etc/dirmngr/dirmngr.conf
+rm_conffile /etc/dirmngr/ldapservers.conf
+rm_conffile /etc/init.d/dirmngr
+rm_conffile /etc/logrotate.d/dirmngr

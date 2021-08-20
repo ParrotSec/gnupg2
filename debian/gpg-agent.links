@@ -1,0 +1,2 @@
+usr/lib/gnupg/gpg-preset-passphrase usr/lib/gnupg2/gpg-preset-passphrase
+usr/lib/gnupg/gpg-protect-tool usr/lib/gnupg2/gpg-protect-tool

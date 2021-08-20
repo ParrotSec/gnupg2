@@ -1,0 +1,135 @@
+Description: Use 4096bit RSA key size by default
+ yes, we know that 2048 is fine and that 3072 is way more
+ than enough for average users. but we see no practical reason
+ to choose a medium security keysize when a higher one is available
+ and has a performance impach that is neither noticeable nor
+ problemaic for general usage, even in in-browser javascript implementations
+ of pgp.
+ .
+ One of the primary reasons why the default RSA keysize was set to 2048bit
+ is because some embedded devices and some legacy pgp implementations
+ didn't support large keysizes. Such cases are edge cases, and we should
+ NOT weaken the default security of newly generated keys because of such
+ rare cases.
+ .
+ GnuPG offers the option to generate weak keys, and people in need to use such keys
+ on limited hardware or old pgp implementations have the freedom to choose the best
+ RSA keysize for their scenario. And what about everyone else? we believe they deserve
+ the highest keysize supported by the standard.
+ .
+ gnupg2 (2.2.20-1parrot1) rolling-testing; urgency=medium
+ .
+   * Import package from Debian.
+   * Use RSA4096 as default.
+   * Enable higher keysizes support.
+Author: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+---
+
+Last-Update: 2021-08-20
+
+--- gnupg2-2.2.27.orig/agent/command.c
++++ gnupg2-2.2.27/agent/command.c
+@@ -843,7 +843,7 @@ static const char hlp_genkey[] =
+   "\n"
+   "  C: GENKEY\n"
+   "  S: INQUIRE KEYPARAM\n"
+-  "  C: D (genkey (rsa (nbits 3072)))\n"
++  "  C: D (genkey (rsa (nbits 4096)))\n"
+   "  C: END\n"
+   "  S: D (public-key\n"
+   "  S: D   (rsa (n 326487324683264) (e 10001)))\n"
+--- gnupg2-2.2.27.orig/doc/wks.texi
++++ gnupg2-2.2.27/doc/wks.texi
+@@ -412,10 +412,10 @@ the submission address:
+ The output of the last command looks similar to this:
+ 
+ @example
+-  sec   rsa3072 2016-08-30 [SC]
++  sec   rsa4096 2016-08-30 [SC]
+         C0FCF8642D830C53246211400346653590B3795B
+   uid           [ultimate] key-submission@@example.net
+-  ssb   rsa3072 2016-08-30 [E]
++  ssb   rsa4096 2016-08-30 [E]
+ @end example
+ 
+ Take the fingerprint from that output and manually publish the key:
+--- gnupg2-2.2.27.orig/g10/keygen.c
++++ gnupg2-2.2.27/g10/keygen.c
+@@ -49,7 +49,7 @@
+ /* The default algorithms. You should also check that the value
+    is inside the bounds enforced by ask_keysize and gen_xxx.  See also
+    get_keysize_range which encodes the allowed ranges.  */
+-#define DEFAULT_STD_KEY_PARAM  "rsa3072/cert,sign+rsa3072/encr"
++#define DEFAULT_STD_KEY_PARAM  "rsa4096/cert,sign+rsa3072/encr"
+ #define FUTURE_STD_KEY_PARAM   "ed25519/cert,sign+cv25519/encr"
+ 
+ /* When generating keys using the streamlined key generation dialog,
+@@ -1643,7 +1643,7 @@ gen_rsa (int algo, unsigned int nbits, K
+   int err;
+   char *keyparms;
+   char nbitsstr[35];
+-  const unsigned maxsize = (opt.flags.large_rsa ? 8192 : 4096);
++  const unsigned maxsize = (opt.flags.large_rsa ? 16384 : 8192);
+ 
+   log_assert (is_RSA(algo));
+ 
+@@ -1652,7 +1652,7 @@ gen_rsa (int algo, unsigned int nbits, K
+ 
+   if (nbits < 1024)
+     {
+-      nbits = 3072;
++      nbits = 4096;
+       log_info (_("keysize invalid; using %u bits\n"), nbits );
+     }
+   else if (nbits > maxsize)
+@@ -2248,26 +2248,26 @@ get_keysize_range (int algo, unsigned in
+     case PUBKEY_ALGO_DSA:
+       *min = opt.expert? 768 : 1024;
+       *max=3072;
+-      def=2048;
++      def=3072;
+       break;
+ 
+     case PUBKEY_ALGO_ECDSA:
+     case PUBKEY_ALGO_ECDH:
+       *min=256;
+       *max=521;
+-      def=256;
++      def=521;
+       break;
+ 
+     case PUBKEY_ALGO_EDDSA:
+       *min=255;
+       *max=441;
+-      def=255;
++      def=441;
+       break;
+ 
+     default:
+       *min = opt.compliance == CO_DE_VS ? 2048: 1024;
+       *max = 4096;
+-      def = 3072;
++      def = 4096;
+       break;
+     }
+ 
+--- gnupg2-2.2.27.orig/g10/keyid.c
++++ gnupg2-2.2.27/g10/keyid.c
+@@ -73,7 +73,7 @@ pubkey_letter( int algo )
+    is copied to the supplied buffer up a length of BUFSIZE-1.
+    Examples for the output are:
+ 
+-   "rsa3072"  - RSA with 3072 bit
++   "rsa4096"  - RSA with 3072 bit
+    "elg1024"  - Elgamal with 1024 bit
+    "ed25519"  - ECC using the curve Ed25519.
+    "E_1.2.3.4"  - ECC using the unsupported curve with OID "1.2.3.4".
+@@ -83,7 +83,7 @@ pubkey_letter( int algo )
+    If the option --legacy-list-mode is active, the output use the
+    legacy format:
+ 
+-   "3072R" - RSA with 3072 bit
++   "4096R" - RSA with 4096 bit
+    "1024g" - Elgamal with 1024 bit
+    "256E"  - ECDSA using a curve with 256 bit
+ 

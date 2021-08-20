@@ -1,0 +1,84 @@
+From: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Date: Tue, 1 Nov 2016 00:45:23 -0400
+Subject: agent: Allow threads to interrupt main select loop with SIGCONT.
+
+* agent/gpg-agent.c (interrupt_main_thread_loop): New function on
+non-windows platforms, allows other threads to interrupt the main loop
+if there's something that the main loop might be interested in.
+
+--
+
+For example, the main loop might be interested in changes in program
+state that affect the timers it expects to see.
+
+I don't know how to do this on Windows platforms, but i welcome any
+proposed improvements.
+
+Signed-off-by: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+---
+ agent/agent.h     |  1 +
+ agent/gpg-agent.c | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+)
+
+diff --git a/agent/agent.h b/agent/agent.h
+index fb46412..4abc6ed 100644
+--- a/agent/agent.h
++++ b/agent/agent.h
+@@ -375,6 +375,7 @@ void *get_agent_scd_notify_event (void);
+ #endif
+ void agent_sighup_action (void);
+ int map_pk_openpgp_to_gcry (int openpgp_algo);
++void interrupt_main_thread_loop (void);
+ 
+ /*-- command.c --*/
+ gpg_error_t agent_inq_pinentry_launched (ctrl_t ctrl, unsigned long pid,
+diff --git a/agent/gpg-agent.c b/agent/gpg-agent.c
+index 69705ed..752552c 100644
+--- a/agent/gpg-agent.c
++++ b/agent/gpg-agent.c
+@@ -430,6 +430,9 @@ static int have_homedir_inotify;
+  * works reliable.  */
+ static int reliable_homedir_inotify;
+ 
++/* Record the pid of the main thread, for easier signalling */
++static pid_t main_thread_pid = (pid_t)(-1);
++
+ /* Number of active connections.  */
+ static int active_connections;
+ 
+@@ -2458,6 +2461,10 @@ handle_signal (int signo)
+       agent_sigusr2_action ();
+       break;
+ 
++      /* nothing to do here, just take an extra cycle on the select loop */
++    case SIGCONT:
++      break;
++
+     case SIGTERM:
+       if (!shutdown_pending)
+         log_info ("SIGTERM received - shutting down ...\n");
+@@ -2796,6 +2803,13 @@ start_connection_thread_ssh (void *arg)
+ }
+ 
+ 
++void interrupt_main_thread_loop (void)
++{
++#ifndef HAVE_W32_SYSTEM
++  kill (main_thread_pid, SIGCONT);
++#endif
++}
++
+ /* helper function for readability: test whether a given struct
+    timespec is set to all-zeros */
+ static inline int
+@@ -2865,8 +2879,10 @@ handle_connections (gnupg_fd_t listen_fd,
+   npth_sigev_add (SIGUSR1);
+   npth_sigev_add (SIGUSR2);
+   npth_sigev_add (SIGINT);
++  npth_sigev_add (SIGCONT);
+   npth_sigev_add (SIGTERM);
+   npth_sigev_fini ();
++  main_thread_pid = getpid ();
+ #else
+ # ifdef HAVE_W32CE_SYSTEM
+   /* Use a dummy event. */

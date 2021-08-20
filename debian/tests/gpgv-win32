@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+
+export GNUPGHOME=$(mktemp -d)
+gpgargs=(--batch --quiet --pinentry-mode=loopback --passphrase '' --with-colons)
+
+# Generate a minimal signing key:
+gpg "${gpgargs[@]}" --quick-gen-key 'Test key for gpgv-win32 <test-key@example.com>'
+
+gpg "${gpgargs[@]}" -o "$GNUPGHOME/key.gpg" --export test-key@example.com
+
+# Sign this very script
+rm -f "${0}.gpg"
+gpg "${gpgargs[@]}" --output "${0}.gpg" --detach-sign "${0}"
+
+# Verify using gpgv
+gpgv --quiet --status-fd 3 3> native.status --keyring "$GNUPGHOME/key.gpg" "${0}.gpg" "${0}"
+
+WINE=/usr/lib/wine/wine
+export WINESERVER=/usr/lib/wine/wineserver32
+
+# Verify using gpgv.exe (using --status-fd 1 because i don't know how
+# to pass a non-standard file descriptor into wine)
+"$WINE" /usr/share/win32/gpgv.exe --quiet --status-fd 1 > win32.status --keyring "Z://${GNUPGHOME}/key.gpg" "${0}.gpg" "${0}" 
+
+# convert to unix newlines if necessary:
+sed -i 's/\r$//' win32.status
+
+diff -u native.status win32.status
+
+head -v win32.status
+
+rm -rf "$GNUPGHOME"

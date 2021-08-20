@@ -1,0 +1,2 @@
+# these binaries are stored in /usr/lib/gnupg, as recommended by upstream:
+scdaemon: spare-manual-page usr/share/man/man1/scdaemon.1.gz

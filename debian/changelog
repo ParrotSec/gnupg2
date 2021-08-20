@@ -1,0 +1,2515 @@
+gnupg2 (2.2.27-2parrot1) lts-updates; urgency=medium
+
+  * Generate R4096 keys by default instead of R2048 OR r3072.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 20 Aug 2021 19:12:31 +0200
+
+gnupg2 (2.2.27-2) unstable; urgency=medium
+
+  * Add a NEWS entry about the end of support for ~/.gnupg/options.
+    Closes: #985158
+
+ -- Christoph Biedl <debian.axhn@manchmal.in-ulm.de>  Thu, 22 Apr 2021 20:40:36 +0200
+
+gnupg2 (2.2.27-1) unstable; urgency=medium
+
+  [ NIIBE Yutaka ]
+  * New upstream release.
+
+  [ Christoph Biedl ]
+  * Tighten libgcrypt and libksba dependency
+
+  [ Daniel Kahn Gillmor ]
+  * change debian packaging branch name to debian/main
+  * refresh patches using gbp pq
+  * point to upstream commit used to improve spawning reliability
+  * Refresh 3072-bit default patch
+  * standards-version: bump to 4.5.1 (no changes needed)
+  * dh: bump to dh 13
+  * clean up lintian overrides
+  * fully drop symcryptrun
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 08 Feb 2021 17:57:00 -0500
+
+gnupg2 (2.2.26-1) UNRELEASED; urgency=medium
+
+  [ Jeremiah C. Foster ]
+  * debian/scdaemon.udev: Add an entry for Librem Key.
+
+  [ NIIBE Yutaka ]
+  * New upstream release.
+  * refresh patches.
+  * debian/rules: Add build for regexp.
+  * debian/gnupg-utils.install: Remove /usr/bin/symcryptrun.
+    Fix for gpgsplit, which is changed in upstream from 'noinst'.
+  * debian/patches/gpg-change-agent-spawn-2019-07-24-v2.patch: New patch to
+    fix a race condition, backported from master (Closes: #868550, #972525).
+  * debian/scdaemon.udev: Add a generic entry for "Gnuk Token" and another
+    for GnuPG e.V.
+  * org.gnupg.scdaemon.metainfo.xml: Add an entry for GnuPG e.V.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 07 Jan 2021 09:07:21 +0900
+
+gnupg2 (2.2.20-1) unstable; urgency=medium
+
+  * New upstream release
+  * refresh patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 23 Mar 2020 15:05:13 -0400
+
+gnupg2 (2.2.19-3) unstable; urgency=medium
+
+  * d/copyright update years
+  * Avoid errors in systemd environment generator (Closes: #950836)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 09 Mar 2020 14:27:42 -0400
+
+gnupg2 (2.2.19-2) unstable; urgency=medium
+
+  * clarify that keys.openpgp.org is a debian-specific
+    choice for default keyserver
+  * Standards-version: bump to 4.5.0 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 27 Feb 2020 17:35:36 -0500
+
+gnupg2 (2.2.19-1) unstable; urgency=medium
+
+  * New upstream release
+
+  [ Roger Shimizu ]
+  * d/control: Update Build-Depends: libgpg-error-dev (>= 1.35)
+
+  [ Daniel Kahn Gillmor ]
+  * clean up unnecessary whitespace
+  * Ship identifiers for Librem Key (Closes: #932474)
+  * drop extra systemd user service links (Closes: #931954)
+  * update signing key for Werner
+  * fixup patch
+  * drop patches already upstream
+  * refresh patches
+  * cherry-pick fix from upstream
+  * dirmngr-idling: add some commentary about dns housekeeping
+  * bump standards-version to 4.4.1 (no changes needed)
+  * sort scdaemon metainfo.xml modalias
+  * announce librem key in scdaemon metainfo.xml
+  * add lintian overrides for executables shipped by upstream in /usr/lib/gnupg/
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 08 Jan 2020 10:33:12 -0500
+
+gnupg2 (2.2.17-3) unstable; urgency=medium
+
+  * avoid data loss when using keyservers (see https://dev.gnupg.org/T4628)
+  * avoid O(N^2) operations when listing certificates with many sigs
+  * d/tests/gpgv-win32: make more robust
+  * avoid system CAs for HKPS pool
+  * build-depend on gpgrt-tools for yat2m
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 16 Jul 2019 20:20:39 -0400
+
+gnupg2 (2.2.17-2) unstable; urgency=medium
+
+  * d/tests/gpgv-win32: depend directly on wine32 (Closes: #905563)
+  * d/tests/gpgv-win32: by default pinentry-mode loopback is allowed upstream
+  * migrate-pubring-from-classic-gpg: make more robust (Closes: #931385)
+  * migrate-pubring-from-classic-gpg: always pass --homedir and --batch
+  * added test of migration script
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 13 Jul 2019 21:36:24 -0400
+
+gnupg2 (2.2.17-1) unstable; urgency=medium
+
+  * New upstream release
+  * upload to unstable, since buster is released
+
+  [ kwadronaut ]
+  * Specify what new and old keyrings are in migration script
+
+  [ Daniel Kahn Gillmor ]
+  * drop unnecessary patches, including broken patch for printing
+    revocation certificates
+  * use DEP-14 for debian/master
+  * refresh and reorganize patches
+  * only use Kristian's CA for the SKS HKPS pool
+  * switch to hkps://keys.openpgp.org as the default keyserver
+  * added NEWS entry about move to keys.openpgp.org
+  * Standards-Version: bump to 4.4.0 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 11 Jul 2019 22:09:21 -0400
+
+gnupg2 (2.2.16-2) experimental; urgency=medium
+
+  * fix HKPS redirections
+  * drop dh_missing --fail-missing (Closes: #930042)
+  * enable cert update without uids (Closes: #930665)
+  * fix upstream spelling of 'arbitrary'
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 18 Jun 2019 12:59:57 -0400
+
+gnupg2 (2.2.16-1) experimental; urgency=medium
+
+  * clean up logcheck rules for gpg-agent (Closes: #918466)
+  * drop patches already upstream
+  * refresh patches
+  * use upstream manpages for gpg-wks-{client,server} (Closes: #918586)
+  * use distributed form of gpgtar, not build/tools/gpgtar
+  * gnupg: ship every doc that upstream ships
+  * gnupg-l10n: ship basic help.txt as well
+  * explicitly avoid shipping gpgscm without the Scheme library
+  * use dh_missing --fail-missing to catch unshipped files
+  * gbp-import filter: drop m4/iconv.m4 as well
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 28 May 2019 20:13:01 -0400
+
+gnupg2 (2.2.15-1) experimental; urgency=medium
+
+  * new upstream release (still in experimental, due to freeze)
+  * refresh patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 01 Apr 2019 09:56:09 -0400
+
+gnupg2 (2.2.14-1) experimental; urgency=medium
+
+  * new upstream release (to experimental, due to freeze)
+  * drop patches already upstream
+  * refresh remaining patches
+  * move to debhelper 12
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 20 Mar 2019 07:19:50 -0400
+
+gnupg2 (2.2.13-2) unstable; urgency=medium
+
+  * Correct gpg-wks-server manpage (Closes: #927431) Thanks, ju xor!
+  * Fix handling private keys with comments (Closes: #928963, #928964)
+  * clean up logcheck rules for gpg-agent (Closes: #918466)
+  * Update gpg-wks-client.1 (Closes: #918586)
+  * cherry-pick more patches from upstream STABLE-BRANCH-2-2
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 14 May 2019 02:08:47 -0400
+
+gnupg2 (2.2.13-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #919856)
+
+  [ Roger Shimizu ]
+  * add some simple tests for gpg{,v}. Thanks to Julian Andres Klode
+    (Closes: #920892).
+
+  [ Daniel Kahn Gillmor ]
+  * refresh patches
+  * cherry-pick fixes from upstream STABLE-BRANCH-2-2
+  * Standards-Version: bump to 4.3.0 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 02 Mar 2019 11:50:15 -0500
+
+gnupg2 (2.2.12-1) unstable; urgency=medium
+
+  * New upstream release
+  * refresh patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 14 Dec 2018 20:17:16 -0500
+
+gnupg2 (2.2.11-1) unstable; urgency=medium
+
+  * new upstream release
+  * refresh patches
+  * refresh upstream/signing-key.asc
+  * deprecate gpg-zip
+  * gnupg-utils: ship gpgtar, since gpg-zip is deprecated
+  * Make gpg-zip use tar from $PATH (Closes: #913582)
+  * fix spelling mistakes in tools documentation
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sun, 18 Nov 2018 17:38:30 -0500
+
+gnupg2 (2.2.10-3) unstable; urgency=medium
+
+  [ Bjarni Ingi Gislason ]
+  * clean up nroff for gpg-check-pattern.1 (Closes: #900247)
+
+  [ Daniel Kahn Gillmor ]
+  * backport fix for subkey binding sigs
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 08 Oct 2018 11:36:01 -0400
+
+gnupg2 (2.2.10-2) unstable; urgency=medium
+
+  * import upstream minor bugfixes
+  * wrap-and-sort -ast
+  * actually ship gpgcompose in gnupg-utils
+  * drop debian/source/options (thanks, Lintian!)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sun, 30 Sep 2018 11:40:42 -0500
+
+gnupg2 (2.2.10-1) unstable; urgency=medium
+
+  * new upstream maintenance release
+  * drop patches already upstream
+  * refresh patches
+  * Standards-Version: bump to 4.2.1 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 30 Aug 2018 11:57:15 -0400
+
+gnupg2 (2.2.9-2) unstable; urgency=medium
+
+  [ Daniel Kahn Gillmor ]
+  * spell Tor correctly (Closes: #895398)
+  * Standards-Version: bump to 4.2.0 (no changes needed)
+  * corrected license in AppStream file
+  * standardize udev rules for Yubikey USB devices and claim them in AppStream
+  * from upstream: s2k bugfix, support for Trustica Cryptoucan
+  * Claim Trustica Cryptoucan via AppStream
+
+  [ Jiří Keresteš ]
+  * udev rule for Trustica Cryptoucan
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 24 Aug 2018 09:48:15 -0400
+
+gnupg2 (2.2.9-1) unstable; urgency=medium
+
+  * New upstream release
+  * Standards-Version: bump to 4.1.5 (no changes needed)
+  * drop patches already upstream
+  * refresh patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 19 Jul 2018 14:02:31 -0400
+
+gnupg2 (2.2.8-3) unstable; urgency=medium
+
+  * Ensure arch: all gnupg package supports binMNUs
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 21 Jun 2018 12:18:14 -0400
+
+gnupg2 (2.2.8-2) unstable; urgency=medium
+
+  [ Daniel Kahn Gillmor ]
+  * import bugfixes and improvements from upstream/STABLE-BRANCH-2-2
+  * ensure that revocation certificates show up in --show-keys output
+    (see 7c79bf7f71aa594102cb684b0abd8331bdac4608)
+  * try passing not explicit paths to wine for the gpgv-win32 test
+  * d/copyright: clarify debian/* licensing
+  * convert gnupg metapackage to Architecture: all
+
+  [ Giovanni Mascellani ]
+  * avoid parallel tests on riscv64 (Closes: #901646)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 20 Jun 2018 06:56:09 -0400
+
+gnupg2 (2.2.8-1) unstable; urgency=medium
+
+  * New upstream release
+  * refresh patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 08 Jun 2018 10:08:36 -0400
+
+gnupg2 (2.2.7-1) unstable; urgency=medium
+
+  * new upstream release
+  * update/refresh patches, improve patch description
+  * bump standards-version to 4.1.4 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 23 May 2018 11:50:27 -0400
+
+gnupg2 (2.2.5-1) unstable; urgency=medium
+
+  * New upstream release
+  * d/gbp.conf: use DEP-14 branch naming
+  * d/control: declare Rules-Requires-Root: no
+  * drop patches already applied upstream
+  * refresh patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 22 Feb 2018 14:20:18 -0800
+
+gnupg2 (2.2.4-3) unstable; urgency=medium
+
+  * version build-deps on mingw library toolchain  (Closes: #889921)
+  * drop misbehaving upstream scd patch (Closes: #889751)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 09 Feb 2018 13:51:35 -0500
+
+gnupg2 (2.2.4-2) unstable; urgency=medium
+
+  [ Daniel Kahn Gillmor ]
+  * move to debhelper 11
+  * d/control: move Vcs to salsa
+  * import more bugfixes and hardware from upstream
+
+  [ Helge Deller ]
+  * Fix FTBFS on hppa (Closes: #887843)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 05 Feb 2018 23:07:21 -0500
+
+gnupg2 (2.2.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * do not use uupdate (we use gbp-import-orig)
+  * dirmngr: cannot avoid idling in current arrangement
+  * adjusting fixes to gpgsm defaults
+  * prefer SHA-512 specifically on personal-digest-preferences.
+  * refresh patches
+  * Standards-Version: bump to 4.1.3 (no changes needed)
+  * drop unnecessary lintian override
+  * reflect actual requirement for libassuan
+  * import bugfixes from upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 03 Jan 2018 12:43:40 -0500
+
+gnupg2 (2.2.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * refreshed patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 30 Nov 2017 19:06:35 -0500
+
+gnupg2 (2.2.2-1) unstable; urgency=medium
+
+  * new upstream release.
+  * avoid testsuite delays from excess socket waiting
+  * clean up trailing whitespace in debian/{rules,changelog}
+  * drop patches already upstream
+  * refresh remaining patches
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 08 Nov 2017 20:09:33 +0100
+
+gnupg2 (2.2.1-5) unstable; urgency=medium
+
+  * block ptrace on scdaemon as well as gpg-agent (Closes: #878952)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 27 Oct 2017 01:43:20 -0400
+
+gnupg2 (2.2.1-4) unstable; urgency=medium
+
+  * restore lintian override, because ftp-master isn't yet running lintian
+    2.5.55 (see #877999 for more details)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 19 Oct 2017 02:33:36 -0400
+
+gnupg2 (2.2.1-3) unstable; urgency=medium
+
+  * bugfix for multiple keyrings (Closes: #878812)
+  * drop an unnecessary lintian override
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 19 Oct 2017 00:23:41 -0400
+
+gnupg2 (2.2.1-2) unstable; urgency=medium
+
+  * adopt bugfixes and documentation improvements from upstream
+  * reorganize debian/patches for simpler maintenance
+  * move gnupg-l10n to Section: localization
+  * Standards-Version: bump to 4.1.1 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 10 Oct 2017 10:05:45 -0400
+
+gnupg2 (2.2.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * drop patches already applied upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 19 Sep 2017 08:26:26 -0400
+
+gnupg2 (2.2.0-3) unstable; urgency=medium
+
+  * avoid FTBFS when TZ=UTC-12 (Closes: #874617)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 08 Sep 2017 02:10:02 -0400
+
+gnupg2 (2.2.0-2) unstable; urgency=medium
+
+  * dirmngr and gpgv-static are Multi-arch: foreign (Closes: #874111)
+  * update to stronger cryptographic defaults.
+  * use upstream gpg-agent-browser.socket systemd user service
+  * publish SSH_AUTH_SOCK for wayland users (Closes: #855868)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 07 Sep 2017 19:20:35 -0400
+
+gnupg2 (2.2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * drop patches already upstream
+  * scdaemon: bugfix from upstream for large ECC keys
+  * Standards-Version: bump to 4.1.0 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 06 Sep 2017 13:10:28 -0400
+
+gnupg2 (2.1.23-2) unstable; urgency=medium
+
+  * add openssh-client to build-deps for testing
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sun, 13 Aug 2017 22:48:23 -0400
+
+gnupg2 (2.1.23-1) unstable; urgency=medium
+
+  * New upstream release
+  * move to unstable
+  * refresh patches
+  * keep default --no-auto-key-retrieve
+  * Standards-Version: 4.0.1 (Priority: extra -> optional)
+  * run tests in parallel
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 11 Aug 2017 09:56:05 -0400
+
+gnupg2 (2.1.22-1) experimental; urgency=medium
+
+  * New upstream release
+  * refreshed patches
+  * pulled a few bugfix patches from upstream
+  * simplify systemd user units
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 07 Aug 2017 01:17:19 -0400
+
+gnupg2 (2.1.21-4) experimental; urgency=medium
+
+  * package reorganization:
+   - new package 'gpg' is just for public key operations
+   - 'gnupg' package is the full suite
+   - 'gnupg-agent' package is renamed to 'gpg-agent'
+   - 'gpgconf' is a base package, other packages depend on it
+   - 'gnupg-utils' are a grab-bag of helper tools that may be useful
+  * scdaemon: add AppStream metainfo about supported smartcards
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 26 Jul 2017 12:50:55 -0400
+
+gnupg2 (2.1.21-3) experimental; urgency=medium
+
+  * include upstream bugfixes and improvements (Closes: #863221)
+  * build gpgcompose, ship new gpgcompose binary package
+  * upgrade to debhelper 10
+  * upgrade to Standards-Version 4.0.0 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sun, 11 Jun 2017 01:50:30 +0200
+
+gnupg2 (2.1.21-2) experimental; urgency=medium
+
+  [ Stefan Bühler ]
+  * Create WKS server and client packages
+
+  [ Daniel Kahn Gillmor ]
+  * minor packaging cleanups
+  * more upstream bugfix and cleanup patches
+  * rename WKS packages to match the tool names
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 18 May 2017 18:02:46 -0400
+
+gnupg2 (2.1.21-1) experimental; urgency=medium
+
+  * new upstream release
+  * drop patches alread yupstream, refresh patches
+  * import post-release bugfixes from upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 16 May 2017 22:42:20 -0400
+
+gnupg2 (2.1.20-4) experimental; urgency=medium
+
+  * avoid shipping or trying to use .skel files
+  * more bugfixes from upstream
+  * skip missing signing keys (Closes: #834922)
+  * prefer available smartcard
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 10 May 2017 14:59:02 -0400
+
+gnupg2 (2.1.20-3) experimental; urgency=medium
+
+  * more upstream bugfixes (Closes: #858400)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 07 Apr 2017 11:36:51 -0400
+
+gnupg2 (2.1.20-2) experimental; urgency=medium
+
+  * more bugfix patches from upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 06 Apr 2017 11:21:24 -0400
+
+gnupg2 (2.1.20-1) experimental; urgency=medium
+
+  * new upstream release
+  * drop patches already upstream, refresh patches
+  * import post-release bugfixes from upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 05 Apr 2017 11:43:09 -0400
+
+gnupg2 (2.1.19-3) experimental; urgency=medium
+
+  * more patches from usptream
+    - test suite should now use /tmp and not require /run/user/
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 21 Mar 2017 12:34:47 -0400
+
+gnupg2 (2.1.19-2) experimental; urgency=medium
+
+  * more patches from upstream (Closes: #854829)
+  * add verbose=3 to the test suite as requested by upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 20 Mar 2017 14:05:46 -0400
+
+gnupg2 (2.1.19-1) experimental; urgency=medium
+
+  * New upstream release (Closes: #854359)
+  * many post-release bugfixes from upstream
+  * add logcheck filters for gpg-agent (Closes: #856438)
+  * Upload to experimental due to the freeze
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 16 Mar 2017 12:47:40 -0400
+
+gnupg2 (2.1.18-6) unstable; urgency=medium
+
+  [ NIIBE Yutaka ]
+  * scdaemon: Fix duplicated entries (Closes: #855056).
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 13 Feb 2017 19:29:34 -0500
+
+gnupg2 (2.1.18-5) unstable; urgency=medium
+
+  [ Daniel Kahn Gillmor ]
+  * Xsession.d/90gpg-agent: use simpler and more direct gpgconf
+    invocations for socket names.
+
+  [ NIIBE Yutaka ]
+  * scdaemon.udev: Add Yubikey and Nitrokey (Closes: #648331, 734889).
+  * scdaemon fix for PC/SC (Closes: #852702, #854005, #854595, #854616).
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 13 Feb 2017 09:15:07 -0500
+
+gnupg2 (2.1.18-4) unstable; urgency=medium
+
+  [ Daniel Kahn Gillmor ]
+  * document that debian disables --allow-version-check
+  * docs, debugging, and bugfix patches from upstream (Closes: #852979)
+
+  [ NIIBE Yutaka ]
+  * scdaemon bugfixes
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 04 Feb 2017 22:03:26 -0500
+
+gnupg2 (2.1.18-3) unstable; urgency=medium
+
+  * fix searches for keys with raw addr-spec
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 25 Jan 2017 16:58:56 -0500
+
+gnupg2 (2.1.18-2) unstable; urgency=medium
+
+  * pull fixes from upstream (including a double-free in gpg-agent)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 25 Jan 2017 09:29:25 -0500
+
+gnupg2 (2.1.18-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 23 Jan 2017 23:12:35 -0500
+
+gnupg2 (2.1.17-6) unstable; urgency=medium
+
+  * Upstream patches, fixing unnecessary delay in gpg-agent (Closes: #851298)
+  * gpg-agent: avoid race in shutdown (Closes: #841143)
+  * improve dirmngr, gpg-agent README.Debian (Closes: #850982)
+  * clean up gpg-agent-idling patch
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 18 Jan 2017 14:40:41 -0500
+
+gnupg2 (2.1.17-5) unstable; urgency=medium
+
+  * more fixes from upstream (improving but not yet closing: #849845)
+  * gpg-agent: actively poll when shutdown is pending.  Thanks, NIIBE
+    Yutaka! (addresses but does not close #841143)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 11 Jan 2017 15:44:57 -0500
+
+gnupg2 (2.1.17-4) unstable; urgency=medium
+
+  * more patches from upstream, including dirmngr debugging
+    improvements
+  * resolve ambiguity in aliased options and commands (Closes: #850475)
+  * auto-enable gpg-agent and dirmngr for systemd user sessions
+  * enable easy reloads from systemd
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 10 Jan 2017 17:30:08 -0500
+
+gnupg2 (2.1.17-3) unstable; urgency=medium
+
+  * more bugfixes from upstream (improving but not yet closing: #849845)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 03 Jan 2017 15:39:52 -0500
+
+gnupg2 (2.1.17-2) unstable; urgency=medium
+
+  * include patches from upstream to avoid build failures on 32-bit
+    arches.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 24 Dec 2016 18:11:51 -0500
+
+gnupg2 (2.1.17-1) unstable; urgency=medium
+
+  * new upstream release.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 24 Dec 2016 15:39:04 -0500
+
+gnupg2 (2.1.16-3) unstable; urgency=medium
+
+  * remove -pie from hppa, kfreebsd-amd64, and x32 builds of
+    gpgv-static (Closes: #846889)
+  * import several upstream bugfix patches (Closes: #846834, #846168)
+  * link gnupg-agent and scdaemon with Enhances/Suggests (Closes: #833518)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 05 Dec 2016 15:34:49 -0500
+
+gnupg2 (2.1.16-2) unstable; urgency=medium
+
+  * avoid using adns, due to lack of security support (Closes: #845078)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 21 Nov 2016 09:57:26 -0500
+
+gnupg2 (2.1.16-1) unstable; urgency=medium
+
+  * New upstream version
+  * dropped many patches already incorporated upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sun, 20 Nov 2016 23:22:49 -0500
+
+gnupg2 (2.1.15-9) unstable; urgency=medium
+
+  * Introduce gpgv-static package (Closes: #806940)
+  * more patches from upstream
+  * use adns for better DNS resolution in dirmngr
+  * add some import-options to
+    migrate-pubring-from-classic-gpg for better migration
+  * reorganize patches to distinguish debian variations from upstream
+  * set simple and easy defaults for keyservers
+  * help dirmngr and gpg-agent idle better in the default case
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 10 Nov 2016 07:28:16 -0800
+
+gnupg2 (2.1.15-8) unstable; urgency=medium
+
+  * rename gpg-agent-restricted.socket to gpg-agent-extra.socket
+    (for symmetry with option names and actual sockets created)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 27 Oct 2016 13:54:53 -0400
+
+gnupg2 (2.1.15-7) unstable; urgency=medium
+
+  * more upstream patches
+  * dirmngr systemd user service is now socket-activated.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 27 Oct 2016 12:48:15 -0400
+
+gnupg2 (2.1.15-6) unstable; urgency=medium
+
+  * more upstream patches (Closes: #841437, #840680)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 26 Oct 2016 17:44:20 -0400
+
+gnupg2 (2.1.15-5) unstable; urgency=medium
+
+  * added udev rules for Fujitsu Siemens cardreader (Closes: #840312)
+  * mark transitional packages Multi-Arch: Foreign (closes: #840258)
+  * make gnupg2 binNMU-safe
+  * more patches from upstream
+  * track upstream decision-making about gpg-agent socket names
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 25 Oct 2016 21:30:06 -0400
+
+gnupg2 (2.1.15-4) unstable; urgency=medium
+
+  * update debian/tests/gpgv-win32
+  * more patches from upstream (Closes: #838153)
+  * tighten dependencies between gnupg and dirmngr (Closes: #834602)
+  * updated systemd user gpg-agent units for socket activation
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 04 Oct 2016 17:22:30 -0400
+
+gnupg2 (2.1.15-3) unstable; urgency=medium
+
+  * Use upstream fix to avoid touching homedir during test suite
+  * backward compatibility for preset-passphrase and protect-tool
+  * add Breaks: for python3-apt too (thanks, Harald Jenny!)
+  * Avoid network access during tests (Closes: #836259)
+  * more patches from upstream
+   - gpgv --output now works
+   - fingerprint display doesn't vary with --keyid-format
+   - minor cleanup to scdaemon dealing with removed cards
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 14 Sep 2016 17:08:58 -0400
+
+gnupg2 (2.1.15-2) unstable; urgency=medium
+
+  * restore keyid output in gpgv (Closes: #836144)
+  * avoid test suite failures when HOME does not exist
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 31 Aug 2016 12:37:48 -0400
+
+gnupg2 (2.1.15-1) unstable; urgency=medium
+
+  * new upstream release
+   - blocks signals during keyring updates (Closes: #293556)
+  * avoid libusb on hurd.  Thanks, Pino Toscano! (Closes: #834533)
+  * permissions on test suite are already fixed
+  * drop patches applied upstream and refresh remaining patches
+  * make gnupg2 reproducible by not regenerating documentation date
+  * make autopkgtest work with modern wine (Closes: #835976)
+  * wrap-and-sort -ast for cleaner diffs
+  * add versioned Breaks: for affected packages (Closes: #835349)
+   - gpgv Breaks: python-debian << 0.1.29 (addresses: #782904)
+   - gnupg Breaks: php-crypt-gpg <= 1.4.1-1 (addresses #835592)
+   - gnupg Breaks: python-apt <= 1.1.0~beta4 (addresses: #835465)
+   - gnupg Breaks: python-gnupg << 0.3.8-3 (addresses: #834514, #834600)
+   - gnupg Breaks: libgnupg-interface-perl << 0.52-3 (addresses: #834281)
+   - gnupg Breaks: libmail-gnupg-perl <= 0.22-1 (addresses: #835075)
+   - gnupg Breaks: libgnupg-perl << 0.19-1 (addresses: #834522)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 30 Aug 2016 13:19:23 -0400
+
+gnupg2 (2.1.14-5) unstable; urgency=medium
+
+  * actually ship /usr/share/doc/gnupg/README.Debian
+  * Release to unstable.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 12 Aug 2016 16:27:22 -0400
+
+gnupg2 (2.1.14-4) experimental; urgency=medium
+
+  * add ZeitControl card (Closes: #814584)
+  * three more fixes from upstream
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 08 Aug 2016 12:54:21 -0400
+
+gnupg2 (2.1.14-3) experimental; urgency=medium
+
+  * cleanup debian/copyright
+  * update debian/watch
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 03 Aug 2016 11:09:05 -0400
+
+gnupg2 (2.1.14-2) experimental; urgency=medium
+
+  * mark the gpgv binary as Priority: important, since apt depends on it
+  * import a bunch of fixes from upstream
+  * include permissioning on patched-in tests
+  * Breaks: some packages that expect old gpg behavior (Closes: #831500)
+  * remove scdaemon.service; it will be managed by gpg-agent.service
+  * avoid bulleted items in debian/NEWS (thanks, Lintian!)
+  * debian/copyright: cleanup, fix URLs
+  * debian/control: use standard URL for Vcs-Browser
+  * fix spelling and grammar noticed by lintian
+  * avoid lintian notes about a misspelled "written"
+  * clean up gpgv2 Description
+  * break out arch-indep localization files into new gnupg-l10n package
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 01 Aug 2016 17:54:59 -0400
+
+gnupg2 (2.1.14-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 15 Jul 2016 01:39:25 +0200
+
+gnupg2 (2.1.13-5) experimental; urgency=medium
+
+  * dependency cleanup!
+   - make Recommends: strictly versioned between gnupg and {gpg-agent,dirmngr}
+   - make gnupg Provide: gpg and mention it in the package description
+   - drop mention of newpg, which has not been in debian for many releases
+   - gnupg2 2.0.18 predates debian wheezy, which is oldstable; drop mention
+     in debian/control
+   - drop Suggests: gnupg-doc, which does not appear to be maintained
+   - drop all references to gpg-idea, which has not been in debian for
+     several releases
+   - removed dependency on "dpkg (>= 1.15.4) | install-info", since that
+     dpkg version predates oldstable (wheezy)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 04 Jul 2016 10:13:42 -0400
+
+gnupg2 (2.1.13-4) experimental; urgency=medium
+
+  * add binutils-multiarch [!amd64 !i386] to Build-Depends-Indep: so that
+    we can generate win32 packages on non-x86 platforms.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 01 Jul 2016 11:30:28 -0400
+
+gnupg2 (2.1.13-3) experimental; urgency=medium
+
+  * pull bugfixes from upstream (Closes: #828109, #814584)
+  * should also allow for reproducible builds, with fix to
+    timestamps in tofu.test
+  * provide supervised dirmngr, gpg-agent, and scdaemon services from
+    systemd's user sessioniif the user wants to enable them.  These
+    services should terminate at logout (Closes: #825911)
+  * avoid launching gpg-agent from Xsession.d since we have more robust
+    session management available (added NEWS entry about this change)
+  * gnupg-agent now Provides: gpg-agent to mitigate common confusion.
+  * updated dirmngr package description.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 28 Jun 2016 13:46:36 -0400
+
+gnupg2 (2.1.13-2) experimental; urgency=medium
+
+  * brown paper bag time: fix build-dep from libusb-1.0.0-dev to
+    libusb-1.0-0-dev
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 17 Jun 2016 23:07:43 -0400
+
+gnupg2 (2.1.13-1) experimental; urgency=medium
+
+  * New upstream release
+   - new keyid-format "none", used by default (Closes: #826273)
+  * Build-depend on libusb-1.0.0-dev to ensure smartcards work (Thanks,
+    gniibe!)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 16 Jun 2016 18:30:36 -0400
+
+gnupg2 (2.1.12-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 10 May 2016 20:58:06 -0400
+
+gnupg2 (2.1.11-7+exp1) experimental; urgency=medium
+
+  * switching over binary package names in experimental -- gnupg2 source
+    package now provides gnupg and gpgv
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 18 Apr 2016 19:17:19 -0400
+
+gnupg2 (2.1.11-7) unstable; urgency=medium
+
+  * move to unstable
+  * re-enable test suites on mips and mipsel since #730846 is resolved
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 18 Apr 2016 07:45:16 -0400
+
+gnupg2 (2.1.11-6+exp4) experimental; urgency=medium
+
+  * stop using help2man to fix cross-building
+  * ensure gpgv-win32 is properly stripped
+  * enable autopkgtest to run without root on systems that already have
+    wine32 installed
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 01 Apr 2016 13:08:07 -0300
+
+gnupg2 (2.1.11-6+exp3) experimental; urgency=medium
+
+  * more cleanup on arch-dependent packages.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 30 Mar 2016 03:36:18 -0400
+
+gnupg2 (2.1.11-6+exp2) experimental; urgency=medium
+
+  * avoid build failures when building only arch-dependent or only
+    arch-independent packages.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 30 Mar 2016 02:59:18 -0400
+
+gnupg2 (2.1.11-6+exp1) experimental; urgency=medium
+
+  * take over gpgv-win32 from gnupg 1.4 packaging
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 28 Mar 2016 23:27:43 -0400
+
+gnupg2 (2.1.11-6) unstable; urgency=medium
+
+  * avoid FTBFS with patch from upstream (Closes: #814842)
+  * bumped standards-version to 3.9.7 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 01 Mar 2016 09:36:41 +0100
+
+gnupg2 (2.1.11-5) unstable; urgency=medium
+
+  * taking over gpgv-udeb from gnupg 1.4 packaging
+  * debian/control: use secure transport for Vcs-* and Homepage
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 04 Feb 2016 17:17:47 -0500
+
+gnupg2 (2.1.11-4) unstable; urgency=medium
+
+  * disable gpgtar, since it is causing unpredictable testsuite failures
+    and we don't ship it anyway.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 03 Feb 2016 11:57:57 -0500
+
+gnupg2 (2.1.11-3) unstable; urgency=medium
+
+  * trying again to get a proper dump of the gpgtar.test.log. sigh.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 28 Jan 2016 08:34:22 -0500
+
+gnupg2 (2.1.11-2) unstable; urgency=medium
+
+  * added temporary hook to view failing gpgtar test output on build
+    daemons since i can't replicate the failures on my own build systems.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 28 Jan 2016 00:53:29 -0500
+
+gnupg2 (2.1.11-1) unstable; urgency=medium
+
+  * new upstream release
+    - drops buggy attempt to detect duplicate keys (Closes: #807819)
+  * removed -dbg package, since we have automatic -dbgsym packages now
+  * removed undocumented gpgkey2ssh; use gpg --export-ssh-key instead
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 25 Jan 2016 15:29:25 -0500
+
+gnupg2 (2.1.10-3) unstable; urgency=medium
+
+  * avoid infinite loop when doing --gen-revoke by fingerprint
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 12 Dec 2015 16:53:40 -0500
+
+gnupg2 (2.1.10-2) unstable; urgency=medium
+
+  * actually use sks-keyservers CA by default if the user asks for
+    hkps://hkps.pool.sks-keyservers.net
+  * move ownership of some files in /usr/share/gnupg2/ to more appropriate
+    owners like gpgsm and dirmngr.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 11 Dec 2015 17:06:10 -0500
+
+gnupg2 (2.1.10-1) unstable; urgency=medium
+
+  * new upstream release
+  * ship sks-keyservers.netCA.pem in dirmngr to make it easier to use hkps.
+  * avoid shipping Changelog-2011, use upstream ChangeLog (Closes:
+    #803225)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 09 Dec 2015 12:05:42 -0500
+
+gnupg2 (2.1.9-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 13 Oct 2015 10:04:33 -0400
+
+gnupg2 (2.1.8-2) UNRELEASED; urgency=medium
+
+  [ NIIBE Yutaka ]
+  * update scdaemon dependencies
+
+  [ Daniel Kahn Gillmor ]
+  * correct ssh fingerprint for ECDSA nistp384 (Closes: #795636)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 17 Sep 2015 00:00:28 -0400
+
+gnupg2 (2.1.8-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 10 Sep 2015 17:00:06 -0400
+
+gnupg2 (2.1.7-2) unstable; urgency=medium
+
+  * upload to unstable
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 11 Aug 2015 21:24:18 -0400
+
+gnupg2 (2.1.7-1) experimental; urgency=medium
+
+  * new upstream release
+  * block ptrace connections to gpg-agent
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 11 Aug 2015 20:05:38 -0400
+
+gnupg2 (2.1.6-1) experimental; urgency=medium
+
+  * new upstream release
+  * drop deprecated gpgsm-gencert.sh
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 07 Jul 2015 14:27:23 -0400
+
+gnupg2 (2.1.5-2) experimental; urgency=medium
+
+  [ Daniel Kahn Gillmor ]
+  * pass DBUS_SESSION_BUS_ADDRESS through to the agent so that
+    pinentry-gnome3 can work across sessions.
+  * ensure that l10n files are rebuilt.
+
+  [ Eric Dorland ]
+  * debian/patches/0003-Include-defs.inc-in-BUILT_SOURCES.patch: Fix for
+    build failure when rebuilding info docs.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 30 Jun 2015 18:13:58 -0400
+
+gnupg2 (2.1.5-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 11 Jun 2015 13:18:56 -0400
+
+gnupg2 (2.1.4-2) experimental; urgency=medium
+
+  * avoid excess dependencies on headless servers (Closes: #753163)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 03 Jun 2015 14:12:49 -0400
+
+gnupg2 (2.1.4-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 28 May 2015 00:25:55 -0400
+
+gnupg2 (2.1.3-1) experimental; urgency=medium
+
+  * New upstream version.
+  * Add gnupg2-dbg (Closes: #781631)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 01 Apr 2015 12:10:38 -0400
+
+gnupg2 (2.1.2-2) experimental; urgency=medium
+
+  * Fix segv due to NULL value stored as opaque MPI.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 21 Feb 2015 10:26:50 -0500
+
+gnupg2 (2.1.2-1) experimental; urgency=medium
+
+  * New upstream version
+  * move from automake1.11 to plain automake (upstream uses 1.14 now)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 12 Feb 2015 20:10:43 -0500
+
+gnupg2 (2.1.1-1) experimental; urgency=medium
+
+  * New upstream version (closes: #772654)
+  * gnupg2 now Breaks: older versions of dirmngr (closes: #769460)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 16 Dec 2014 14:58:06 -0500
+
+gnupg2 (2.1.0-1) experimental; urgency=medium
+
+  * import upstream 2.1.0 release.
+  * drop debian/patches/speed-up-test-suite.patch -- included upstream.
+  * avoid self-reporting as a beta now that this is a release
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 06 Nov 2014 12:31:06 -0500
+
+gnupg2 (2.1.0~beta895-3) experimental; urgency=medium
+
+  * update gnupg-agent.xsession to export ssh-agent where
+    configured. (Closes: #767341)
+  * use cheap/fast entropy for the test suite so that builds on
+    low-entropy machines go faster.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 30 Oct 2014 13:37:08 -0400
+
+gnupg2 (2.1.0~beta895-2) experimental; urgency=medium
+
+  * added pkg-config to Build-Depends.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 29 Oct 2014 18:36:27 -0400
+
+gnupg2 (2.1.0~beta895-1) experimental; urgency=medium
+
+  * new upstream version in experimental (Closes: #762844, #751266, #762844)
+  * ship /usr/bin/gpgparsemail (Closes: #760575)
+  * document that doc/OpenPGP is not actually an RFC, but just refers to
+    one (closes: #745410)
+  * Bump Standards-Version to 3.9.6 (no changes needed)
+  * --enable-large-secmem to ensure that gpg2 works with pre-generated
+    oversized RSA keys
+  * updated /etc/X11/Xsession.d/90gpg-agent to export $GPG_AGENT_INFO
+    about the standard socket.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 29 Oct 2014 17:53:06 -0400
+
+gnupg2 (2.0.28-3) unstable; urgency=medium
+
+  * pass DBUS_SESION_BUS_ADDRESS to the agent for gnome3.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 04 Jul 2015 14:21:41 -0400
+
+gnupg2 (2.0.28-2) unstable; urgency=medium
+
+  * d/clean: drop stamp-po to rebuild l10n (Closes: #788989)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 30 Jun 2015 17:17:11 -0400
+
+gnupg2 (2.0.28-1) unstable; urgency=medium
+
+  * new upstream release
+  * really address excess dependencies on headless server (thanks Raphaël
+    Halimi for noticing) (Closes: #753163)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 02 Jun 2015 12:16:57 -0400
+
+gnupg2 (2.0.27-2) unstable; urgency=medium
+
+  * import upstream fix to avoid replicating unknown subkey
+    packets. (Closes: #787045) (Thanks, NIIBE Yutaka)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 28 May 2015 00:55:51 -0400
+
+gnupg2 (2.0.27-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Provide a simple way for users to avoid gpg-agent hijacking,
+    working around: #760102 (Closes: #753163)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 08 May 2015 18:15:15 -0400
+
+gnupg2 (2.0.26-6) unstable; urgency=medium
+
+  * Avoid NULL dereference with opaque MPI.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 21 Feb 2015 18:01:40 -0500
+
+gnupg2 (2.0.26-5) unstable; urgency=medium
+
+  * import bug-fixes from upstream
+    (Closes: #773415, #773469, #773471, #773472, #773423)
+  * Fixes CVE-2015-1606 "Use after free, resulting from failure to skip
+    invalid packets", CVE-2015-1607 "memcpy with overlapping ranges,
+    resulting from incorrect bitwise left shifts" (Closes: #778577)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 16 Feb 2015 17:45:06 -0500
+
+gnupg2 (2.0.26-4) unstable; urgency=medium
+
+  [ David Prévot ]
+  * Update POT and PO files, and ensure the translations get rebuild
+  * Update French translation (Closes: #769574)
+  * Update Ukrainian translation, thanks to Yuri Chornoivan
+  * Update German translation, thanks to Werner Koch
+  * Update Danish translation, thanks to Joe Hansen
+  * Update Japanese translation, thanks to NIIBE Yutaka
+  * Update Chinese (traditional) translation, thanks to Jedi Lin
+  * Update Russian translation, thanks to Ineiev
+  * Update Polish translation, thanks to Jakub Bogusz
+  * Update Spanish translation, thanks to Manuel "Venturi" Porras Peralta
+    (Closes: #770727)
+  * New Dutch translation, thanks to Frans Spiesschaert (Closes: #770981)
+
+  [ Daniel Kahn Gillmor ]
+  * bugfix and cryptographic safety changes imported from upstream:
+   - Avoid regression when adding subkeys with strong s2k algorithms
+     (Closes: #772780) Thanks, NIIBE Yutaka
+   - Allow french translation to work when prompting for passphrase.
+   - add build and runtime support for larger RSA keys (Closes: #739424)
+   - fix runtime errors on bad input (Closes: #771987)
+   - deprecate insecure one-argument variant for gpg --verify of detached
+     signatures (Closes: #771992)
+   - initialize trustdb before trying to clear it (Closes: #735363)
+   - default to issuing SHA256 signatures for RSA
+   - avoid relying on MD5 signatures
+   - show v3 key fingerprints as all zero (OpenPGPv3 is deprecated)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sun, 04 Jan 2015 17:17:00 -0500
+
+gnupg2 (2.0.26-3) unstable; urgency=medium
+
+  * fix typo in gpg.info (closes: #760273)
+  * drop versioned Build-Conflicts on automake by setting environment
+    variables in debian/rules
+  * ship /usr/bin/gpgparsemail (closes: #760575)
+  * warn but don't fail when scdaemon options are in ~/.gnupg/gpg.conf
+    (closes: #762844)
+  * do not break on --trust-model=always (closes: #751266)
+  * document that doc/OpenPGP is not actually an RFC, but just refers to
+    one (closes: #745410)
+  * Bump Standards-Version to 3.9.6 (no changes needed)
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 30 Sep 2014 23:39:15 -0400
+
+gnupg2 (2.0.26-2) unstable; urgency=medium
+
+  * ignore emacs turds in debian/
+  * update Vcs fields
+  * move package to group maintenance
+  * wrap-and-sort cleanup of debian/*
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 28 Aug 2014 11:42:18 -0700
+
+gnupg2 (2.0.26-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/control: Suggest parcimonie. Thanks ilf. (Closes: #752261)
+
+ -- Eric Dorland <eric@debian.org>  Tue, 19 Aug 2014 18:09:08 -0400
+
+gnupg2 (2.0.25-2) unstable; urgency=medium
+
+  * debian/control: Switch to libgcrypt20-dev (aka 1.6 release).
+
+ -- Eric Dorland <eric@debian.org>  Fri, 08 Aug 2014 14:12:05 -0400
+
+gnupg2 (2.0.25-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Eric Dorland <eric@debian.org>  Mon, 30 Jun 2014 13:10:04 -0400
+
+gnupg2 (2.0.24-1) unstable; urgency=high
+
+  * New upstream release. Fixes CVE-2014-4617 "infinite loop when
+    decompressing data packets". (Closes: #752498)
+  * debian/patches/02-gpgv2-dont-link-libassuan.diff: Drop, now
+    upstreamed.
+
+ -- Eric Dorland <eric@debian.org>  Wed, 25 Jun 2014 00:11:19 -0400
+
+gnupg2 (2.0.23-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/upstream/signing-key.asc: Rename upstream-signing-key.pgp to
+    the new, supported name.
+  * debian/control: Restore versioned conflict against gpg-idea. (Closes:
+    #733984)
+  * debian/control: Add Recommends on dirmngr for gpgsm. (Closes: #683579)
+
+ -- Eric Dorland <eric@debian.org>  Sun, 08 Jun 2014 19:20:17 -0400
+
+gnupg2 (2.0.22-3) unstable; urgency=low
+
+  * debian/watch, debian/upstream-signing-key.pgp: Add upstream signing
+    key for uscan verification.
+  * debian/kbxutil.1, debian/rules: Add better description and regenerate
+    the manpage.
+  * debian/control: Remove version on gpg-idea conflict, add missing
+    Breaks for gpgsm and convert Conflicts to Breaks for gpgv2.
+  * debian/control: Move gnupg-agent to Depends for gpgsm instead of
+    Replaces (which in turn should have been Recommends).
+  * debian/control: Standards-Version to 3.9.5.
+  * debian/copyright: Switch to a shiny DEP-5 copyright file.
+
+ -- Eric Dorland <eric@debian.org>  Wed, 01 Jan 2014 22:56:56 -0500
+
+gnupg2 (2.0.22-2) unstable; urgency=low
+
+  * debian/control: Fix Build-Conflicts on newer automakes. Thanks Chris
+    Boot. (Closes: #726015)
+  * debian/control: IDEA is no longer patented, drop its metion from the
+    description. Thanks brian m. carlson. (Closes: #726139)
+  * debian/rules: Disable the test suite on mips and mipsel to work around
+    Bug:#730846.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 30 Nov 2013 23:47:56 -0500
+
+gnupg2 (2.0.22-1) unstable; urgency=low
+
+  * New upstream version. Fixes CVE-2013-4402 and CVE-2013-4351. (Closes:
+    #725433, #722724)
+  * debian/gnupg2.install: Install gnupg-card-architecture.png for the
+    info file.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 05 Oct 2013 17:45:28 -0400
+
+gnupg2 (2.0.21-2) unstable; urgency=low
+
+  * debian/rules, debian/gnupg2.install: Switch libexecdir to
+    /usr/lib/gnupg2 to install helper binaries to a non-multiarch specific
+    location. (Closes: #717303)
+  * debian/control, debian/gpgv2.install: Split out gpgv2 into its own
+    package.
+  * debian/control, debian/gnupg2.install, debian/kbxutil.1: Add rule and
+    manpage for kbxutil using help2man. (Closes: #323494)
+  * debian/patches/02-gpgv2-dont-link-libassuan.diff: Don't link gpgv2
+    against libassuan as it's not used.
+  * debian/rules: Install changelog for gpgv2.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 01 Sep 2013 00:42:16 -0400
+
+gnupg2 (2.0.21-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #613465, #720369)
+  * debian/patches/01-gnupg2-rename.diff: Refresh patch.
+  * debian/control: Fix Vcs-Git path.
+  * debian/control: Now depends on libgpg-error >= 1.11.
+  * debian/control: Build-Depends on automake1.11 since the test suite
+    fails on newer versions. (Closes: #713287)
+  * debian/control: Also need a Build-Conflicts on automake (<= 1.12).
+
+ -- Eric Dorland <eric@debian.org>  Sat, 24 Aug 2013 20:33:19 -0400
+
+gnupg2 (2.0.20-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #691237, #583893)
+  * debian/patches/02-cve-2012-6085.diff: Remove, merged upstream.
+  * debian/control: Upgrade Standards-Version to 3.9.4.
+  * debian/compat, debian/control: Upgrade to debhelper v9.
+  * debian/control, debian/rules: Drop hardening-wrapper, now that we use
+    debhelper v9.
+  * debian/scdaemon.install: scdaemon has moved under $libexecdir.
+  * debian/control: Tighten dependency on scdaemon.
+  * debian/rules: Turn on all hardening options.
+  * debian/patches/01-gnupg2-rename.diff: Refresh patch.
+  * debian/gnupg-agent.install, debian/gnupg2.install,
+    debian/scdaemon.install: Fix /usr/lib paths for multi-arch.
+  * debian/rules: Pass ${pkglibdir} to --libexecdir since dh v9 passes
+    ${libdir} by default.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 11 May 2013 18:28:57 -0400
+
+gnupg2 (2.0.19-2) unstable; urgency=high
+
+  * debian/patches/02-cve-2012-6085.diff: Patch from upstream to fix
+    CVE-2012-6085, "gnupg key import memory corruption". (Closes: #697251)
+  * debian/control: Use canonical addresses for VCS.
+  * debian/control: Fix scdaemon short description.
+
+ -- Eric Dorland <eric@debian.org>  Fri, 04 Jan 2013 00:56:52 -0500
+
+gnupg2 (2.0.19-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #666092)
+  * debian/control: Add Multi-Arch: foreign to all packages.
+  * debian/rules: Update ChangeLog locations.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 31 Mar 2012 01:06:02 -0400
+
+gnupg2 (2.0.18-2) unstable; urgency=low
+
+  * debian/control, debian/gpgsm.install, debian/scdaemon.install: Add a
+    separate package for the scdaemon. (Closes: #416129)
+  * debian/control, debian/gpgsm.install, debian/gnupg2.install,
+    gnupg-agent.install: Move gpg-preset-passphrase and gpg-protect-tool
+    into the gnupg-agent.
+  * debian/control: Upgrade Standards-Version to 3.9.2.
+  * debian/rules: Install ChangeLog for new scdaemon package.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 15 Oct 2011 20:21:35 -0400
+
+gnupg2 (2.0.18-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #635206)
+  * debian/copyright: Update ftp location. (Closes: #624404)
+  * debian/patches/01-gnupg2-rename.diff: Refresh patch.
+
+ -- Eric Dorland <eric@debian.org>  Tue, 30 Aug 2011 03:43:20 -0400
+
+gnupg2 (2.0.17-3) unstable; urgency=low
+
+  * debian/rules: Convert the rules file to use the lovely dh format.
+  * debian/gnupg2.dirs, debian/gnupg-agent.dirs, debian/gpgsm.dirs: Remove
+    unless dirs files.
+  * debian/gnupg-agent.lintian-overrides, debian/gnupg2.lintian-overrides,
+    debian/gpgsm.lintian-overrides: Remove unneeded lintian-overrides files.
+
+ -- Eric Dorland <eric@debian.org>  Mon, 14 Feb 2011 03:17:39 -0500
+
+gnupg2 (2.0.17-2) unstable; urgency=low
+
+  * debian/control: Add dependency on dpkg (>= 1.15.4) | install-info for
+    info install trigger.
+  * debian/control, debian/rules: Use debian build hardening.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 13 Feb 2011 16:33:17 -0500
+
+gnupg2 (2.0.17-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #584316, #603985, #603983, #603984)
+  * debian/patches/02-encode-s2k.diff,
+    debian/patches/03-gpgsm-realloc.diff, debian/patches/series: Drop now
+    unneeded security patches.
+  * debian/rules, debian/patches/01-gnupg2-rename.diff,
+    debian/gnupg2.info, debian/gnupg2.install: No need to rename the info
+    file anymore.
+  * debian/patches/01-gnupg2-rename.diff: Rename the autoconf package for
+    better renaming of pkg directories. (Closes: #579006)
+  * debian/control, debian/compat: Upgrade to debhelper level 8.
+  * debian/control:
+    - Upgrade Standards-Version to 3.9.1.
+    - Update Build-Depends versions for the latest release.
+  * debian/gnupg2.install: Add the applygnupgdefaults command. (Closes:
+    #567537)
+  * debian/gnupg2.docs: doc/faq.html no longer exists.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 13 Feb 2011 16:06:41 -0500
+
+gnupg2 (2.0.14-2) unstable; urgency=low
+
+  * debian/*.lintian, debian/*.lintian-overrides, debian/rules: Rename
+    lintian files and use dh_lintian instead of shell snippets.
+  * debian/source/patch-header, debian/source/options: Delete patch header
+    and remove single-debian-patch option.
+  * debian/patches/01-gnupg2-rename.diff: Move patch to do the necessary
+    renaming of gnupg -> gnupg2 in a quilt patch.
+  * debian/patches/02-encode-s2k.diff: Added patch to fix passphrase
+    problem in gpgsm. Thanks Martijn van Brummelen for the NMU to fix this
+    problem in 2.0.14-1.1.
+  * debian/patches/03-gpgsm-realloc.diff: Fix for "Realloc Bug with X.509
+    certificates" for gpgsm. (Closes: #590122)
+  * debian/rules, debian/control: Use dh-autoreconf and autopoint to
+    regenerate autotools files at build time.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 25 Jul 2010 02:16:42 -0400
+
+gnupg2 (2.0.14-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Build depend on libreadline-dev instead of
+    libreadline5-dev, since libreadline6-dev is out. (Closes: #548922)
+  * debian/source/format, debian/source/options,
+    debian/source/patch-header: Convert to v3 quilt format, with
+    single-debian-patch.
+  * debian/control: Tighten dependency on gnupg-agent. (Closes: #551792)
+
+ -- Eric Dorland <eric@debian.org>  Sat, 09 Jan 2010 21:15:18 -0500
+
+gnupg2 (2.0.13-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Depend instead of Recommend gnupg-agent. (Closes:
+    #538947)
+
+ -- Eric Dorland <eric@debian.org>  Mon, 07 Sep 2009 20:38:23 -0400
+
+gnupg2 (2.0.12-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #499569, #463270, #446494, #314068,
+    #519375, #514587)
+  * debian/control: Change build dependency on gs to ghoscript, since
+    ghoscript has been replaced.
+  * debian/compat: Use debhelper v7.
+  * debian/control: Update Standards-Version to 3.8.2.
+  * debian/control: Use ${misc:Depends}.
+  * configure.ac: Override pkgdatadir so that it points to
+    /usr/share/gnupg2. (Closes: #528734)
+  * debian/rules: No longer need to specify pkgdatadir at make install
+    time.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 23 Aug 2009 20:48:11 -0400
+
+gnupg2 (2.0.11-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #496663)
+  * debian/control: Make the description a little more distinctive than
+    gnupg v1's. Thanks Jari Aalto. (Closes: #496323)
+
+ -- Eric Dorland <eric@debian.org>  Sun, 08 Mar 2009 22:46:47 -0400
+
+gnupg2 (2.0.9-3) unstable; urgency=medium
+
+  * Urgency medium to try to beat the release.
+  * tools/gpgkey2ssh.c: Patch from Daniel Kahn Gillmor to fix broken ssh
+    key generation. (Closes: #473841)
+
+ -- Eric Dorland <eric@debian.org>  Mon, 21 Jul 2008 03:48:11 -0400
+
+gnupg2 (2.0.9-2) unstable; urgency=low
+
+  * The "I've neglected you too long" release.
+
+  * debian/control:
+    - Add recommends on gnupg-agent for gpgsm and gnupg2, since they need
+      it under most circumstances. (Closes: #459462, #477691)
+    - Depend on pinentry instead of recommend, and move pinentry-gtk2 to the
+      front of the alternatives list. (Closes: #462951)
+  * keyserver/gpgkeys_curl.c, keyserver/gpgkeys_hkp.c: Fix FTBFS with gcc
+    4.3 strictness on bitfields combined with curl. (Closes: #476999)
+
+ -- Eric Dorland <eric@debian.org>  Mon, 28 Apr 2008 03:22:20 -0400
+
+gnupg2 (2.0.9-1) unstable; urgency=low
+
+  * New upstream release. Fixes CVE-2008-1530, Key import memory corruption.
+    (Closes: #472928)
+  * debian/rules: Don't ignore status of make distclean, just check for
+    the existance of the Makefile.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 29 Mar 2008 03:21:21 -0400
+
+gnupg2 (2.0.8-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #428635)
+  * debian/watch: Use passive ftp, ftp.gnupg.org doesn't seem happy
+    otherwise. (Closes: #456467)
+  * debian/control:
+    - Requires libassuan >= 1.0.4 now.
+    - Remove the XS- prefix from the Vcs-* headers.
+    - Add Homepage header.
+    - Upgrade Standards-Version to 3.7.3.0.
+    - Make gnupg2 optional rather than extra.
+    - Remove unnecessary conflict on suidmanager.
+
+ -- Eric Dorland <eric@debian.org>  Sat, 22 Dec 2007 02:06:42 -0500
+
+gnupg2 (2.0.7-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/rules:
+    - Remove unnecessary deletion of the .gmo files. (Closes: #442583)
+    - Clean out some old comments
+  * gnupg-agent.xsession: Remove the quotes around --write-env-file
+    argument. Not ideal, but fine for now. Thanks Luis Rodrigo Gallardo
+    Cruz. (Closes: #443580)
+
+ -- Eric Dorland <eric@debian.org>  Sun, 30 Sep 2007 02:50:40 -0400
+
+gnupg2 (2.0.6-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #437289)
+  * debian/gnupg-agent.xsession: Run the Xsession under the gpg-agent, so
+    it exits properly when the session dies. (Closes: #401843)
+  * debian/control: Add XS-Vcs headers for its new git home.
+
+ -- Eric Dorland <eric@debian.org>  Mon, 03 Sep 2007 23:29:11 -0400
+
+gnupg2 (2.0.5-2) unstable; urgency=low
+
+  * The "Ubuntu, I would have done it had you only asked" release.
+
+  * debian/copyright: Fix download location. Thanks Ubuntu.
+  * debian/README.Debian: Remove, doesn't contain any relevant info.
+  * debian/rules:
+    - Build with --sysconfdir=/etc, thanks Bernhard Herzog. (Closes: #434790)
+    - Run dh_installexamples.
+    - Don't list the docs to install in here.
+  * debian/gnupg2.examples: New file, install gpgconf.conf as an example
+    into /usr/share/doc. Hope this is a good compromise Bernhard. (Closes:
+    #434878)
+  * debian/control:
+    - Remove opensc and pcsc-lite build dependencies, they're not used anymore.
+    - Add libcurl4-gnutls-dev build dep, to use the real curl.
+  * g10/call-agent.c: set DBG_ASSUAN to 0 to suppress a debug
+    message. Thanks Ubuntu.
+  * debian/gnupg2.docs, debian/gpgsm.docs: Move installed docs in here,
+    add some new docs. Thanks Ubuntu.
+  * debian/rules, debian/gnupg-agent.install: Build symcryptrun and install it
+    in the gnupg-agent package. Thanks Bernhard Herzog. (Closes: #434787)
+  * debian/rules, debian/control: Only recommend libldap, don't depend on
+    it.Thanks Riku. (Closes: #435138)
+
+ -- Eric Dorland <eric@debian.org>  Thu, 16 Aug 2007 22:24:16 -0400
+
+gnupg2 (2.0.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/watch: Add watch file.
+  * debian/control:
+    - Require libassuan 1.0.2 or greater.
+    - Require libksba 1.0.2 or greater.
+    - Don't recommend plain gpg anymore.
+  * debian/copyright: Update copyright text for GPL v3 relicensing.
+  * docs/scdaemon.texi: Remove old --print-atr documentation. Thanks
+    Ludovic Rousseau. (Closes: #404128)
+
+ -- Eric Dorland <eric@debian.org>  Sun, 22 Jul 2007 16:03:32 -0400
+
+gnupg2 (2.0.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Eric Dorland <eric@debian.org>  Fri, 11 May 2007 00:41:01 -0400
+
+gnupg2 (2.0.3-1) unstable; urgency=high
+
+  * New upstream release.
+    - Fixes multoiple messages problem aka CVE-2007-1263.
+
+ -- Eric Dorland <eric@debian.org>  Fri,  9 Mar 2007 03:28:53 -0500
+
+gnupg2 (2.0.2-1) unstable; urgency=high
+
+  * New upstream release. (Closes: #409559)
+  * Thanks Andreas Barth for NMUs. (Closes: #400777, #401895, #401913)
+  * debian/gpgsm.install: pcsc-wrapper renamed to gnupg-pcsc-wrapper.
+
+ -- Eric Dorland <eric@debian.org>  Mon, 19 Feb 2007 20:34:52 -0500
+
+gnupg2 (2.0.0-5) unstable; urgency=high
+
+  * debian/control: Remove unnecessary dependencies on makedev and
+    udev. Thanks Marco d'Itri.
+  * doc/gnupg.texi, debian/gnupg2.info, debian/rules: Set the output file
+    to gnupg2.info, and use that for the index. (Closes: #398493)
+
+ -- Eric Dorland <eric@debian.org>  Fri, 24 Nov 2006 02:23:35 -0500
+
+gnupg2 (2.0.0-4) unstable; urgency=medium
+
+  * debian/control: Update forgotten replaces for pcsc-wrapper move.
+
+ -- Eric Dorland <eric@debian.org>  Mon, 20 Nov 2006 23:02:25 -0500
+
+gnupg2 (2.0.0-3) unstable; urgency=medium
+
+  * debian/control: Remove warning about development, thanks Gonzalo
+    HIGUERA DIAZ. (Closes: #399551)
+
+ -- Eric Dorland <eric@debian.org>  Mon, 20 Nov 2006 14:32:33 -0500
+
+gnupg2 (2.0.0-2) unstable; urgency=medium
+
+  * All packaging fixes, so urgency medium to beat the freeze.
+  * debian/distfiles, debian/lintian.override, debian/point-to-info.1:
+    Remove unused files.
+  * debian/gnupg2.info, debian/rules, gnupg2.files: Install all the info
+    files properly. (Closes: #398493)
+  * debian/rules:
+    - Remove some unnecessary autotools build rules.
+    - Move some of make install targets more correctly to the
+      configure line.
+  * debian/*.files, debian/rules: Rename *.files to .install and use
+    dh_install nstead of dh_movefiles.
+  * debian/gnupg-agent.xsession: Account for spaces in the configuration
+    file, thanks Artem Zolochevskiy. (Closes: #352326)
+  * debian/control:
+    - Adjust build-dependency versions slightly to match what the
+      configure scipt requires.
+    - Update Standards-Version to 3.7.2.2.
+  * debian/gpgsm.install, debian/gnupg2.install: Install the pcsc-wrapper
+    in gpgsm. (Closes: #353232)
+  * debian/gpgsm.install, debian/rules: Install gpg-protect-tool into
+    /usr/libb/gnupg2.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 19 Nov 2006 18:03:39 -0500
+
+gnupg2 (2.0.0-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #398215)
+  * common/estream.c: #define PTH_SYSCALL_SOFT 0 as suggested by Daniel Hess.
+
+ -- Eric Dorland <eric@debian.org>  Sun, 12 Nov 2006 23:52:59 -0500
+
+gnupg2 (1.9.94-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Eric Dorland <eric@debian.org>  Thu,  2 Nov 2006 16:06:30 -0500
+
+gnupg2 (1.9.93-1) unstable; urgency=medium
+
+  * New upstream release. Urgency medium to try to beat the freeze. Thanks
+    to Andreas Metzler for getting this package into shape.
+
+ -- Eric Dorland <eric@debian.org>  Wed, 25 Oct 2006 00:41:15 -0400
+
+gnupg2 (1.9.91-0.1) unstable; urgency=low
+
+  * New upstream version, built against clean upstream tarball.
+    (Closes: #378489,#388257)
+  * bump Build-Depends:
+    - libgpg-error-dev 0.6 -> 1.4
+    - libassuan-dev 0.6.10 -> 0.9.1
+    - libksba-dev 0.9.13 -> 1.0.0 (closes: #368552)
+  * Add libreadline5-dev to Build-Depends.
+  * Pass proper --build and --host args to ./configure.
+  * configure with --mandir='$${prefix}/share/man'.
+  * Add $(LIBINTL) to gpgsplit_LDADD in tools/Makefile.am.
+  * New upstream includes a lot more manpages, ship them.
+    (Closes: #300129,#300677)
+    gpg-agent(1) documents ~/gpg-agent.conf.  (Closes: #300676)
+  * Update debian/copyright.
+  * Drop gnupg2.postinst gnupg2.postrm postinst postrm. They all only consited
+    of calls to suidregister for /usr/bin/gpg" or "chmod 4755 /usr/bin/gpg".
+    suidregister has been obsolete for a long time and /usr/bin/gpg is not
+    part of these packages. - If /usr/bin/gpg(v)2 was supposed to be installed
+    suid it should be shipped with these permissions in the deb instead
+    using chmod in postinst anyway.
+  * Drop preinst (ending up as gnupg-agent's preinst), which only showed
+    a warning on upgrades from <<0.3.2-1. - There never was a gnupg-agent
+    0.3.2-1.
+  * Add (noop) binary-indep target as required by policy 4.9.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun,  8 Oct 2006 07:51:44 +0000
+
+gnupg2 (1.9.20-2) unstable; urgency=high
+
+  * debian/control: Make myself the maintainer with Matthias' permission.
+  * Acknowledge NMU. (Closes: #375053, #376755)
+  * g10/parse-packet.c: Patch from Martin Schulze to backport security fix
+    for CVE-2006-3746, crash when receiving overly long comments.
+
+ -- Eric Dorland <eric@debian.org>  Fri,  4 Aug 2006 18:11:43 -0400
+
+gnupg2 (1.9.20-1.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Adapt patch from upstream CVS, fixing buffer overflow leading to remote
+    DoS/crash (CVE-2006-3082). (Closes: #375053)
+
+ -- Steinar H. Gunderson <sesse@debian.org>  Tue,  4 Jul 2006 20:37:43 +0200
+
+gnupg2 (1.9.20-1) unstable; urgency=low
+
+  * New Upstream version. Closes:#306890,#344530
+    * Closes:#320490: gpg-protect-tool fails to decrypt PKCS-12 files
+  * Depend on libopensc2-dev, not -1-. Closes:#348106
+
+ -- Matthias Urlichs <smurf@debian.org>  Tue, 24 Jan 2006 04:31:42 +0100
+
+gnupg2 (1.9.19-2) unstable; urgency=low
+
+  * Convert debian/changelog to UTF-8.
+  * Put gnupg-agent and gpgsm lintian overrides in the respectively
+    right package.  Closes: #335066
+  * Added debhelper tokens to maintainer scripts.
+  * xsession fixes:
+    o Added host name to gpg-agent PID file name.  Closes: #312717
+    o Fixed xsession script to be able to run under zsh.  Closes: #308516
+    o Don't run gpg-agent if one is already running.  Closes: #336480
+  * debian/control:
+    o Fixed package description of gpgsm package.  Closes: #299842
+    o Added mention of gpg-agent to description of gnupg-agent package.
+      Closes: #304355
+  * Thanks to Peter Eisentraut <petere@debian.org> for all of the above.
+
+ -- Matthias Urlichs <smurf@debian.org>  Thu,  8 Dec 2005 22:13:21 +0100
+
+gnupg2 (1.9.19-1) unstable; urgency=low
+
+  * Merged with 1.9.19.
+  * Re-enable gpgv2 package.
+
+ -- Matthias Urlichs <smurf@debian.org>  Sat, 22 Oct 2005 14:33:33 +0200
+
+gnupg2 (1.9.17-1) unstable; urgency=low
+
+  * Merged with Upstream 1.9.17.
+
+ -- Matthias Urlichs <smurf@debian.org>  Mon,  4 Jul 2005 01:56:43 +0200
+
+gnupg2 (1.9.15-6) unstable; urgency=high
+
+  * Move gpg-protect-tool to the gpgsm package.
+    Closes: #303492.
+    High urgency because this renders gpgsm unuseable for some people.
+  * gpg-agent: Override max-cache-ttl if a higher default is set.
+    Closes: #302692.
+
+ -- Matthias Urlichs <smurf@debian.org>  Thu,  7 Apr 2005 10:13:19 +0200
+
+gnupg2 (1.9.15-5) unstable; urgency=low
+
+  * Add /etc/X11/Xsession.d/90gpg-agent script.  Closes: #300128.
+  * Emphasize that gnupg2 is NOT useful at the moment.
+  * Conflict+replace gpg-agent with newpg.
+
+ -- Matthias Urlichs <smurf@debian.org>  Thu, 10 Mar 2005 22:46:10 +0100
+
+gnupg2 (1.9.15-4) unstable; urgency=low
+
+  * Incorporated Ubuntu changes from Andreas Mueller.
+
+ -- Matthias Urlichs <smurf@debian.org>  Thu, 10 Mar 2005 21:41:59 +0100
+
+gnupg2 (1.9.15-3ubuntu3) hoary; urgency=low
+
+  * removed info file
+
+ -- Andreas Mueller <amu@ubuntu.com>  Tue,  8 Mar 2005 01:58:39 +0100
+
+gnupg2 (1.9.15-3ubuntu2) hoary; urgency=low
+
+  * changed rules file, part cp gnupg.info to mv
+    and added dh_installinfo.
+  * changed Standards Version to 3.6.1
+
+ -- Andreas Mueller <amu@ubuntu.com>  Tue,  8 Mar 2005 00:53:31 +0100
+
+gnupg2 (1.9.15-3ubuntu1) hoary; urgency=low
+
+  * added missing build depends texinfo
+
+ -- Andreas Mueller <amu@ubuntu.com>  Mon,  7 Mar 2005 22:47:56 +0100
+
+gnupg2 (1.9.15-2) hoary; urgency=low
+
+  * Initial checkin
+
+ -- Andreas Mueller <amu@ubuntu.com>  Mon,  7 Mar 2005 21:13:32 +0100
+
+gnupg2 (1.9.15-1) experimental; urgency=low
+
+  * New Upstream release.
+  * Removed -doc package:
+    - The package itself is too smal to merit being packaged separately.
+    - Interim solution: Documentation is included in the gnupg2 package.
+    - Goal: ask Upstream to split the .info file.
+  * Removed suidness.
+  * Update debian/copyright.
+  * Require libassuan >= 0.6.9.
+
+ -- Matthias Urlichs <smurf@debian.org>  Tue, 25 Jan 2005 08:19:15 +0100
+
+gnupg2 (1.9.11+cvs20040924-5) experimental; urgency=low
+
+  * Rebuild to depend on opensc1.
+  * Split -doc into its own package.
+
+ -- Matthias Urlichs <smurf@debian.org>  Thu, 16 Dec 2004 10:30:44 +0100
+
+gnupg2 (1.9.11+cvs20040924-4) experimental; urgency=low
+
+  * Turn on setuid-ness.
+    - Added Lintian overrides.
+  * Install all "standard" message files.
+    - Makefile.in: The package name for gettext is in the macro PACKAGE_GT,
+      not PACKAGE.
+  * Fix shebang line of addgnupghome script.
+  * Install info file in the correct place.
+  * Build cleanups.
+
+ -- Matthias Urlichs <smurf@debian.org>  Tue,  5 Oct 2004 10:59:56 +0200
+
+gnupg2 (1.9.11+cvs20040924-3) experimental; urgency=low
+
+  * rename gnupg-agent's changelog file
+  * Fix gnupg-agent's dependencies
+
+ -- Matthias Urlichs <smurf@debian.org>  Sun,  3 Oct 2004 20:14:30 +0200
+
+gnupg2 (1.9.11+cvs20040924-2) experimental; urgency=low
+
+  * Shipped a /usr/share/locale.alias file. Ouch.
+  * Split off gpgsm.
+
+ -- Matthias Urlichs <smurf@debian.org>  Wed, 29 Sep 2004 10:25:51 +0200
+
+gnupg2 (1.9.11+cvs20040924-1) experimental; urgency=low
+
+  * New Upstream.
+
+ -- Matthias Urlichs <smurf@debian.org>  Sat, 25 Sep 2004 11:05:44 +0200
+
+gnupg2 (1.9.10+cvs-1) experimental; urgency=low
+
+  * Packaged latest Upstream version.
+  * Split gpg-agent into its own .deb.
+  * Bit the bullet and started using debhelper.
+
+ -- Matthias Urlichs <smurf@debian.org>  Thu, 19 Aug 2004 11:43:34 +0200
+
+gnupg2 (1.9.9-1) experimental; urgency=low
+
+  * Packaged latest Upstream version.
+
+ -- Matthias Urlichs <smurf@debian.org>  Mon, 14 Jun 2004 17:18:18 +0200
+
+gnupg2 (1.9.5-1) experimental; urgency=low
+
+  * Packaged Upstream development version.
+    Closes:#187548
+
+ -- Matthias Urlichs <smurf@debian.org>  Mon,  8 Mar 2004 05:30:35 +0100
+
+gnupg (1.2.4-4) unstable; urgency=low
+
+  * 12_zero_length_header.dpatch: update patch from David Shaw
+    <dshaw@jabberwocky.com> to fix the fix of crashing on certain
+    keys. Closes: #234289
+
+ -- James Troup <james@nocrew.org>  Mon, 23 Feb 2004 18:02:20 +0000
+
+gnupg (1.2.4-3) unstable; urgency=low
+
+  * Move to dpatch; existing non-debian/ change split into
+    10_hppa_unaligned_constant.dpatch.
+
+  * debian/rules: include /usr/share/dpatch/dpatch.make.
+  * debian/rules (build): depend on patch-stamp.
+  * debian/rules (clean): depend on unpatch.  Remove debian/patched.
+  * debian/control (Build-Depends): add dpatch.
+
+  * debian/rules: update version number and use install_foo convenience
+    variables.
+  * debian/rules (clean): remove emacs backup files from any directory.
+
+  * 11_fi_po_update.dpatch: new patch from Tommi Vainikainen
+    <thv+debian@iki.fi> to update Finnish translation as the current one
+    renders gnupg unusable.  Closes: #232030, #222951, #192582
+  * debian/rules (clean): remove po/fi.gmo to avoid dpkg-source errors
+    over unrepresentable changes to source.
+
+  * 12_zero_length_header.dpatch: new patch from David Shaw
+    <dshaw@jabberwocky.com> to fix cases where importing certain keys
+    makes the keyring unuseable.  Closes: #232714
+
+  * 13_revoked_keys.dpatch: new patch from David Shaw
+    <dshaw@jabberwocky.com> to list revoked keys as revoked.  Closes: #231814
+
+  * 14_getkey_not_found_fix.dpatch: new patch from David Shaw
+    <dshaw@jabberwocky.com> to fix --list-sigs incorrectly claiming "User
+    id not found".  Closes: #229549
+
+ -- James Troup <james@nocrew.org>  Fri, 20 Feb 2004 16:38:12 +0000
+
+gnupg (1.2.4-2) unstable; urgency=low
+
+  * mpi/hppa1.1/udiv-qrnnd.S: patch from LaMont Jones <lamont@debian.org>
+    to fix unaligned constant.  Closes: #228456
+  * debian/copyright: update year and version number.
+
+ -- James Troup <james@nocrew.org>  Tue, 20 Jan 2004 17:19:58 +0000
+
+gnupg (1.2.4-1) unstable; urgency=medium
+
+  * New upstream release.
+   * Most support for ElGamal Sign+Encrypt keys has been removed. Closes: #222293
+   * No longer miss-identifies GNU/KFreeBSD as GNU/Hurd. Closes: #216957
+   * Fixes build error on GNU/KFreeBSD (and Glibc-based GNU/KNetBSD). Closes: #221079
+   * Fixes segmentation fault in prime generator. Closes: #213989
+   * Fixes trustdb not updating without ultimately trusted keys. Closes: #222368
+
+  * debian/control (Build-Depends): add libbz2-dev.
+
+ -- James Troup <james@nocrew.org>  Wed, 31 Dec 2003 17:57:52 +0000
+
+gnupg (1.2.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #207340).
+   * gpg no longer kills keyrings by importing broken keys.  Closes: #196505
+   * options.skel uses subkeys.pgp.net instead of pgp.mit.edu. Closes: #206092
+   * --import now closes files when it's done. Closes: #196643
+   * A key listing speed regression has been fixed. Closes: #192083
+  * debian/copyright: update URL and date.
+  * debian/rules: update dates and version.
+
+  * debian/control (Standards-Version): bump to 3.6.0.
+
+  * debian/Upgrading_From_PGP.txt: new file from to Richard Braakman
+    <dark@xs4all.nl>.  Closes: #173233
+  * debian/rules (binary-arch): install it.
+
+  * debian/rules (build): correct libexecdir passed to configure; patch
+    from Matthias Cramer <cramer@freestone.net>.  Fixes invocation of
+    gpgkeys_ldap.  Closes: #168486
+
+ -- James Troup <james@nocrew.org>  Thu, 28 Aug 2003 14:08:50 +0100
+
+gnupg (1.2.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control (Standards-Version): bump to 3.5.9.0.
+  * debian/rules (binary-arch): install convert-from-106 as
+    gpg-convert-from-106 and fix the path to gpg.
+  * debian/control: remove trailing full stop from short description.
+  * debian/control: remove out-dated and contradictory information about
+    RSA.
+
+ -- James Troup <james@nocrew.org>  Mon,  5 May 2003 03:08:58 +0100
+
+gnupg (1.2.1-2) unstable; urgency=low
+
+  * Update config.guess (to 2002-10-21) and config.sub (to 2002-09-05).
+    Thanks to Ryan Murray.  Closes: #166696
+
+ -- James Troup <james@nocrew.org>  Mon, 28 Oct 2002 01:47:26 +0000
+
+gnupg (1.2.1-1) unstable; urgency=low
+
+  * New upstream version.
+   * An inifinte loop in --update-trustdb has been fixed.  Closes: #162039
+   * The polish translation is now correctly specified as UTF-8.  Closes: #162885
+   * --refresh-keys is now documented in the manpage.  Closes: #165566
+  * debian/control (Conflicts): add gpg-idea <= 2.2 since gnupg >= 1.2 is
+    incompatible with that version of gpg-idea.  Closes: #162314
+
+ -- James Troup <james@nocrew.org>  Fri, 25 Oct 2002 18:18:43 +0100
+
+gnupg (1.2.0-1) unstable; urgency=low
+
+  * New upstream version.  Closes: #161817.
+   * --options no longer mis-handles a directory as an argument.  Closes: #151973
+   * gpg now prompts before sending all keys to the keyserver.  Closes: #64607
+   * There is now a gnupg(7) manpage.  Closes: #157750
+   * The permission checking has been sanitized and handles non-home-dir
+     keyrings better.  Closes: #147760
+   * notation data longer than 5 characters is now handled.  Closes: #156871
+   * an abort when setting trust levels in a czech locale has been fixed.
+     Closes: #149212
+  * debian/rules (binary-arch): there are no more modules, adjust
+    accordingly.
+  * debian/postinst, debian/prerm: remove; no longer do /usr/doc symlinks.
+  * debian/rules (binary-arch): don't install obsolete postinst or prerm.
+  * debian/rules (binary-arch): gzip gnupg.7 too.
+  * debian/rules (build): pass --libexecdir=/usr/lib/gnupg to configure.
+  * debian/rules (binary-arch): likewise, pass suitable libexcedir
+    argument to make install.
+  * debian/control (Standards-Version): update to 3.5.7.0.
+  * debian/copyright: update URL and date.
+  * debian/rules: update dates and version.
+
+ -- James Troup <james@nocrew.org>  Sun, 22 Sep 2002 22:26:25 +0100
+
+gnupg (1.0.7-2) unstable; urgency=low
+
+  * debian/control (Suggests): add xloadimage since that's what gpg uses
+    by default to view photo IDs.  Thanks to Julien Danjou
+    <acid@debian.org> for the suggestion.  Closes: #156245
+  * debian/control (Depends): add "hurd" to the alternatives to
+    makedev. Thanks to Michal Suchanek <hramrach_l@centrum.cz> for
+    noticing.  Closes: #158492
+  * po/it.po: patch to fix typos from Marco Bodrato
+    <bodrato@gulp.linux.it.  Closes: #149462
+  * g10/g10.c (main): remove the bogus undef of USE_SHM_COPROCESSING to
+    match upstream and fix gabber and libgnupg-perl.  Closes: #147679, #151969
+
+ -- James Troup <james@nocrew.org>  Thu, 29 Aug 2002 01:42:58 +0100
+
+gnupg (1.0.7-1) unstable; urgency=low
+
+  * New upstream version.  Closes: #145477.
+    * GDBM support has been removed.  Closes: #33009.
+    * Now adds the default keyring when a keyring is specified.
+      Closes: #50616, #65260.
+    * Now does the Right Thing when receiving a key from the keyserver and
+      the key in question is in both a read-only and writable keyring.
+      Closes: #63297.
+    * Automatic key retrieval is now configurable.  Closes: #64940.
+    * --no-options supresses ~/.gnupg creation again.  Closes: #95486.
+    * duplicate trust entries are no longer treated as an error. Closes: #96480.
+    * There's now no comment line in ascii armours. Closes: #100088.
+    * Handle secret keyring given as keyring better.  Closes: #100581, #106670.
+    * It's now documented that --with-colons unconditionally uses UTF8.
+      Closes: #101446, 101454.
+    * s/now/knows/ typo in manpage fixed.  Closes: #107471.
+    * There's now support for a primary UID.  Closes: #106567, #108155.
+    * Handles errors in uncompression layer beter. Closes: #112392.
+    * Key selection has been entirely revamped.  Closes: #136170.
+    * Handles empty encrypt-to. Closes: #138378
+
+  * debian/rules (binary-arch): remove empty /usr/info directory, thanks
+    to Joey Hess <joeyh@debian.org>.  Closes: #121864.
+  * debian/control: remove duplicated word from long description, thanks
+    to Nicolas Boulenguez <nicolas.boulenguez@free.fr>.  Closes: #144786.
+  * README: correct URL to GPH and other docs, thanks to Mark Brown
+    <broonie@sirena.org.uk>.  Closes: #100277.
+  * debian/control (Standards-Version): updated to 3.5.6.1.
+  * debian/rules (binary-arch): only strip ELF binaries.  es_ES -> es hack
+    no longer needed as fixed upstream.
+  * debian/control (Build-Depends): remove libgdbmg1-dev; no longer used.
+  * debian/README.Debian: remove note about gdbm support which was finally
+    removed.  Update note on old versions of gnupg to reflect the
+    pre-historic nature of those versions.
+  * debian/control (Build-Depends): add libldap2-dev.
+  * debian/rules (binary-arch): call dpkg-shlibdeps for all ELF binaries.
+  * debian/control (Build-Depends): add file.
+  * debian/control (Priority): increase to standard to match overrides.
+
+ -- James Troup <james@nocrew.org>  Sat, 11 May 2002 15:08:02 +0100
+
+gnupg (1.0.6-3) unstable; urgency=low
+
+  * moved into main.
+
+ -- James Troup <james@nocrew.org>  Tue, 19 Mar 2002 16:17:09 +0000
+
+gnupg (1.0.6-2) unstable; urgency=high
+
+  * debian/rules (binary-arch): remove the erroneous
+    /usr/share/locale/locale.alias that 'make install' adds; closes:
+    #99293.
+
+ -- James Troup <james@nocrew.org>  Wed, 30 May 2001 20:40:59 +0100
+
+gnupg (1.0.6-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Tue, 29 May 2001 20:59:49 +0100
+
+gnupg (1.0.5-4) unstable; urgency=low
+
+  * Patch from Werner.
+
+ -- James Troup <james@nocrew.org>  Sun, 27 May 2001 09:34:50 +0100
+
+gnupg (1.0.5-3) unstable; urgency=low
+
+  * Apply patch from Matthew Wilcox <matthew@wil.cx> to fix assembly on
+    hppa.
+
+ -- James Troup <james@nocrew.org>  Sun, 13 May 2001 02:36:45 +0100
+
+gnupg (1.0.5-2) unstable; urgency=medium
+
+  * util/http.c: patch from Werner that fixes --send-key, closes: #96277.
+  * debian/control (Depends): accept devfsd in place of makedev, closes:
+    #96307.
+
+ -- James Troup <james@nocrew.org>  Mon,  7 May 2001 00:13:51 +0100
+
+gnupg (1.0.5-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/README.Debian: fix spelling and update URL.
+  * debian/rules (binary): remove the new info files.
+  * scripts/config.{guess,sub}: sync with subversions, closes: #95729.
+
+ -- James Troup <james@nocrew.org>  Mon, 30 Apr 2001 02:12:38 +0100
+
+gnupg (1.0.4-4) unstable; urgency=low
+
+  * po/ru.po: patch by Ilya Martynov <m_ilya@agava.com> to replace German
+    entries and add missing translations, closes: #93987.
+  * g10/revoke.c (ask_revocation_reason): typo fix (s/non longer/no
+    longer/g); noticed by Colin Watson <cjw44@flatline.org.uk>, closes:
+    #93664.
+
+  * Deprecated depreciated; noticed by Vincent Broman
+    <broman@spawar.navy.mil>.
+
+  * Following two patches are from Vincent Broman.
+  * g10/mainproc.c (proc_tree): use iobuf_get_real_fname() in preference
+    to iobuf_get_fname().
+  * g10/openfile.c (open_sigfile): handle .sign prefixed files correctly.
+
+ -- James Troup <james@nocrew.org>  Fri, 20 Apr 2001 23:32:44 +0100
+
+gnupg (1.0.4-3) unstable; urgency=medium
+
+  * debian/rules (binary): make gpg binary suid, closes: #86433.
+  * debian/postinst: don't use suidregister.
+  * debian/postrm: removed (only called suidunregister).
+  * debian/control: conflict with suidmanager << 0.50.
+  * mpi/longlong.h: apply fix for ARM long long artimetic from Philip
+    Blundell <philb@gnu.org>, closes: #87487.
+  * debian/preinst: the old GnuPG debs have moved to people.debian.org.
+  * cipher/random.c: #include <time.h> as well as <sys/time.h>
+  * g10/misc.c: likewise.
+  * debian/rules: define a strip alias which removes the .comment and
+    .note sections.
+  * debian/rules (binary-arch): use it.
+  * debian/lintian.override: new file; override the SUID warning from
+    lintian.
+  * debian/rules (binary-arch): install it.
+
+ -- James Troup <james@nocrew.org>  Sun, 25 Feb 2001 05:24:58 +0000
+
+gnupg (1.0.4-2) stable unstable; urgency=high
+
+  * Apply security fix patch from Werner.
+  * Apply another patch from Werner to fix bogus warning on Rijndael
+    usage.
+  * Change section to 'non-US'.
+
+ -- James Troup <james@nocrew.org>  Mon, 12 Feb 2001 07:47:02 +0000
+
+gnupg (1.0.4-1) stable unstable; urgency=high
+
+  * New upstream version.
+  * Fixes a serious bug which could lead to false signature verification
+    results when more than one signature is fed to gpg.
+
+ -- James Troup <james@nocrew.org>  Tue, 17 Oct 2000 17:26:17 +0100
+
+gnupg (1.0.3b-1) unstable; urgency=low
+
+  * New upstream snapshot version.
+
+ -- James Troup <james@nocrew.org>  Fri, 13 Oct 2000 18:08:14 +0100
+
+gnupg (1.0.3-2) unstable; urgency=low
+
+  * debian/control: Conflict, Replace and Provide gpg-rsa & gpg-rsaref.
+    Fix long description to reflect the fact that RSA is no longer
+    patented and now included. [#72177]
+  * debian/rules: move faq.html to /usr/share/doc/gnupg/ and remove FAQ
+    from /usr/share/gnupg/.  Thanks to Robert Luberda
+    <robert@pingu.ii.uj.edu.pl> for noticing. [#72151]
+  * debian/control: Suggest new package gnupg-doc. [#64323, #65560]
+  * utils/secmem.c (lock_pool): don't bomb out if mlock() returns ENOMEM,
+    as Linux will do this if resource limits (or other reasons) prevent
+    memory from being locked, instead treat it like permission was denied
+    and warn but continue.  Thanks to Topi Miettinen
+    <Topi.Miettinen@nic.fi>. [#70446]
+  * g10/hkp.c (not_implemented): s/ist/is/ in error message.
+  * debian/README.Debian: add a note about GDBM support and why it is
+    disabled.  Upstream already fixed the manpage.  [#65913]
+  * debian/rules (binary-arch): fix the Spanish translation to be 'es' not
+    'es_ES' at Nicolás Lichtmaier <nick@debian.org>'s request. [#57314]
+
+ -- James Troup <james@nocrew.org>  Sun,  1 Oct 2000 14:55:03 +0100
+
+gnupg (1.0.3-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Mon, 18 Sep 2000 15:56:54 +0100
+
+gnupg (1.0.2-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Thu, 13 Jul 2000 20:26:50 +0100
+
+gnupg (1.0.1-2) unstable; urgency=low
+
+  * debian/control (Build-Depends): added.
+  * debian/copyright: corrected location of copyright file.  Removed
+    references to Linux.  Removed warnings about beta nature of GnuPG.
+  * debian/rules (binary-arch): install documentation into
+    /usr/share/doc/gnupg/ and pass mandir to make install to ensure the
+    manpages go to /usr/share/man/.
+  * debian/postinst: create /usr/doc/gnupg symlink.
+  * debian/prerm: new file; remove /usr/doc/gnupg symlink.
+  * debian/rules (binary-arch): install prerm.
+  * debian/control (Standards-Version): updated to 3.1.1.1.
+
+ -- James Troup <james@nocrew.org>  Thu, 30 Dec 1999 16:16:49 +0000
+
+gnupg (1.0.1-1) unstable; urgency=low
+
+  * New upstream version.
+  * doc/gpg.1: updated to something usable from
+    ftp://ftp.gnupg.org/pub/gcrypt/gnupg/gpg.1.gz.
+
+ -- James Troup <james@nocrew.org>  Sun, 19 Dec 1999 23:47:10 +0000
+
+gnupg (1.0.0-3) unstable; urgency=low
+
+  * debian/rules (build): remove the stunningly ill-advised --host option
+    to configure.  [#44698, #48212, #48281]
+
+ -- James Troup <james@nocrew.org>  Tue, 26 Oct 1999 01:12:59 +0100
+
+gnupg (1.0.0-2) unstable; urgency=low
+
+  * debian/rules (binary-arch): fix the permissions on the
+    modules. [#47280]
+  * debian/postinst, debian/postrm: fix the package name passed to
+    suidregister. [#45013]
+  * debian/control: update long description. [#44636]
+  * debian/rules (build): pass the host explicitly to configure to avoid
+    problems on sparc64. [(Should fix) #44698].
+
+ -- James Troup <james@nocrew.org>  Wed, 20 Oct 1999 23:39:05 +0100
+
+gnupg (1.0.0-1) unstable; urgency=low
+
+  * New upstream release. [#44545]
+
+ -- James Troup <james@nocrew.org>  Wed,  8 Sep 1999 00:53:02 +0100
+
+gnupg (0.9.10-2) unstable; urgency=low
+
+  * debian/rules (binary-arch): install lspgpot.  Requested by Kai
+    Henningsen <kai@khms.westfalen.de>. [#42288]
+  * debian/rules (binary-arch): correct the path where modules are looked
+    for.  Reported by Karl M. Hegbloom <karlheg@odin.cc.pdx.edu>. [#40881]
+  * debian/postinst, debian/postrm: under protest, register gpg the
+    package with suidmanager and make it suid by default.
+    [#29780,#32590,#40391]
+
+ -- James Troup <james@nocrew.org>  Tue, 10 Aug 1999 00:12:40 +0100
+
+gnupg (0.9.10-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Fri,  6 Aug 1999 01:16:21 +0100
+
+gnupg (0.9.9-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Sun, 25 Jul 1999 01:06:31 +0100
+
+gnupg (0.9.8-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/rules (binary-arch): don't create a gpgm manpage as the binary
+    no longer exists.  Noticed by Wichert Akkerman
+    <wichert@cs.leidenuniv.nl>. [#38864]
+
+ -- James Troup <james@nocrew.org>  Sun, 27 Jun 1999 01:07:58 +0100
+
+gnupg (0.9.7-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Tue, 25 May 1999 13:23:24 +0100
+
+gnupg (0.9.6-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/copyright: update version number, noticed by Lazarus Long
+    <lazarus@frontiernet.net>.
+  * debian/control (Depends): depend on makedev (>= 2.3.1-13) to ensure
+    that /dev/urandom exists; reported by Steffen Markert
+    <smort@rz.tu-ilmenau.de>. [#32076]
+
+ -- James Troup <james@nocrew.org>  Tue, 11 May 1999 21:06:27 +0100
+
+gnupg (0.9.5-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/control (Description): no tabs.  [Lintian]
+
+ -- James Troup <james@nocrew.org>  Wed, 24 Mar 1999 22:37:40 +0000
+
+gnupg (0.9.4-1) unstable; urgency=low
+
+  * New version.
+  * debian/control: s/GNUPG/GnuPG/
+
+ -- Werner Koch <wk@isil.d.suttle.de>  Mon, 8 Mar 1999 19:58:28 +0100
+
+gnupg (0.9.3-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Mon, 22 Feb 1999 22:55:04 +0000
+
+gnupg (0.9.2-1) unstable; urgency=low
+
+  * New version.
+  * debian/rules (build): Removed CFLAGS as the default is now sufficient.
+  * debian/rules (clean): remove special handling cleanup in intl.
+
+ -- Werner Koch <wk@isil.d.suttle.de>  Wed, 20 Jan 1999 21:23:11 +0100
+
+gnupg (0.9.1-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Sat,  9 Jan 1999 22:29:11 +0000
+
+gnupg (0.9.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * g10/armor.c (armor_filter): add missing new line in comment string; as
+    noticed by Stainless Steel Rat <ratinox@peorth.gweep.net>.
+
+ -- James Troup <james@nocrew.org>  Tue, 29 Dec 1998 20:22:43 +0000
+
+gnupg (0.4.5-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/rules (clean): force removal of intl/libintl.h which the
+    Makefiles fail to remove properly.
+
+ -- James Troup <james@nocrew.org>  Tue,  8 Dec 1998 22:40:23 +0000
+
+gnupg (0.4.4-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Sat, 21 Nov 1998 01:34:29 +0000
+
+gnupg (0.4.3-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/README.Debian: new file; contains same information as is in the
+    preinst.  Suggested by Wichert Akkerman <wichert@cs.leidenuniv.nl>.
+  * debian/rules (binary-arch): install `README.Debian'
+  * debian/control (Standards-Version): updated to 2.5.0.0.
+
+ -- James Troup <james@nocrew.org>  Sun,  8 Nov 1998 19:08:12 +0000
+
+gnupg (0.4.2-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/preinst: improve message about the NEWS file which isn't
+    actually installed when it's referred to, thanks to Martin Mitchell
+    <martin@debian.org>.
+  * debian/rules (binary-arch): don't install the now non-existent `rfcs',
+    but do install `OpenPGP'.
+
+ -- James Troup <james@nocrew.org>  Sun, 18 Oct 1998 22:48:34 +0100
+
+gnupg (0.4.1-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/rules (binary-arch): fix the gpgm manpage symlink now installed
+    by `make install'.
+
+ -- James Troup <james@nocrew.org>  Sun, 11 Oct 1998 17:01:21 +0100
+
+gnupg (0.4.0-1) unstable; urgency=high
+
+  * New upstream version. [#26717]
+  * debian/copyright: tone down warning about alpha nature of gnupg.
+  * debian/copyright: new maintainer address.
+  * debian/control: update extended description.
+  * debian/rules (binary-arch): install FAQ and all ChangeLogs.
+  * debian/preinst: new; check for upgrade from (<= 0.3.2-1) and warn about
+    incompatibilities in keyring format and offer to move old copy out of
+    gpg out of the way for transition strategy and inform the user about
+    the old copies of gnupg available on my web page.
+  * debian/rules (binary-arch) install preinst.
+  * debian/rules (binary-arch): don't depend on the test target as it is
+    now partially interactive (tries to generate a key, which requires
+    someone else to be using the computer).
+
+ -- James Troup <james@nocrew.org>  Thu,  8 Oct 1998 00:47:07 +0100
+
+gnupg (0.3.2-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/control (Maintainer): new address.
+  * debian/copyright: updated list of changes.
+
+ -- James Troup <james@nocrew.org>  Thu,  9 Jul 1998 21:06:07 +0200
+
+gnupg (0.3.1-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <james@nocrew.org>  Tue,  7 Jul 1998 00:26:21 +0200
+
+gnupg (0.3.0-2) unstable; urgency=low
+
+  * Applied bug-fix patch from Werner.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Fri, 26 Jun 1998 12:18:29 +0200
+
+gnupg (0.3.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/control: rewrote short and long description.
+  * cipher/Makefile.am: link tiger with -lc.
+  * debian/rules (binary-arch): strip loadable modules.
+  * util/secmem.c (lock_pool): get rid of errant test code; fix from
+    Werner Koch <wk@isil.d.shuttle.de>.
+  * debian/rules (test): new target which runs gnupg's test suite.
+    binary-arch depends on it, to ensure it's run whenever the package is
+    built.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Thu, 25 Jun 1998 16:04:57 +0200
+
+gnupg (0.2.19-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/control: Updated long description.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Sat, 30 May 1998 12:12:35 +0200
+
+gnupg (0.2.18-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <J.J.Troup@comp.brad.ac.uk>  Sat, 16 May 1998 11:52:47 +0200
+
+gnupg (0.2.17-1) unstable; urgency=high
+
+  * New upstream version.
+  * debian/control (Standards-Version): updated to 2.4.1.0.
+  * debian/control: tone down warning about alpha nature of gnupg, as per
+    README.
+  * debian/copyright: ditto.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Mon,  4 May 1998 22:36:51 +0200
+
+gnupg (0.2.15-1) unstable; urgency=high
+
+  * New upstream version.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Fri, 10 Apr 1998 01:12:20 +0100
+
+gnupg (0.2.13-1) unstable; urgency=high
+
+  * New upstream version.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Wed, 11 Mar 1998 01:52:51 +0000
+
+gnupg (0.2.12-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Sat,  7 Mar 1998 13:52:40 +0000
+
+gnupg (0.2.11-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Wed,  4 Mar 1998 01:32:12 +0000
+
+gnupg (0.2.10-1) unstable; urgency=low
+
+  * New upstream version.
+  * Name changed upstream.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Mon,  2 Mar 1998 07:32:05 +0000
+
+g10 (0.2.7-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- James Troup <jjtroup@comp.brad.ac.uk>  Fri, 20 Feb 1998 02:05:34 +0000

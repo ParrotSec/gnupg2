@@ -1,0 +1,62 @@
+.TH KBXUTIL "1" "March 2016" "kbxutil (GnuPG) 2.1.11" "User Commands"
+
+.SH NAME
+kbxutil \- List, export, import Keybox data
+
+.SH SYNOPSIS
+.B kbxutil
+.RB [ OPTIONS ]
+.RB [ FILES ]
+
+.SH DESCRIPTION
+List, export, import Keybox data
+
+.SH COMMANDS
+.TP
+.B \-\-stats
+show key statistics
+.TP
+.B \-\-import\-openpgp
+import OpenPGP keyblocks
+.TP
+.B \-\-find\-dups
+find duplicates
+.TP
+.B \-\-cut
+export records
+
+.SH OPTIONS
+.TP
+.BI \-\-from " N"
+first record to export
+.TP
+.BI \-\-to " N"
+last record to export
+.TP
+.BR \-v ", " \-\-verbose
+verbose
+.TP
+.BR \-q ", " \-\-quiet
+be somewhat more quiet
+.TP
+.BR \-n ", " \-\-dry\-run
+do not make any changes
+.TP
+.B \-\-debug
+set debugging flags
+.TP
+.B \-\-debug\-all
+enable full debugging
+
+.SH BUGS
+Please report bugs to <https://dev.gnupg.org>.
+
+.SH COPYRIGHT
+Copyright \(co 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+This manpage was written by \fBDaniel Kahn Gillmor\fR for the Debian
+distribution (but may be used by others).

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+set -x
+
+DIR=$(mktemp -d)
+GPG_HOME="$DIR/gnupg"
+gpg=(gpg --homedir "$GPG_HOME" --batch --quiet --with-colons)
+gpg1=(gpg1 --homedir "$GPG_HOME" --batch --quiet --with-colons)
+
+mkdir "$GPG_HOME"
+chmod 700 "$GPG_HOME"
+
+cat /usr/share/keyrings/debian-archive-*.gpg | "${gpg1[@]}" --import
+"${gpg1[@]}" --list-keys
+"${gpg[@]}" --list-keys > "$DIR/key.list.before"
+migrate-pubring-from-classic-gpg "$GPG_HOME"
+"${gpg[@]}" --list-keys > "$DIR/key.list.after"
+
+diff -u "$DIR/key.list.before" "$DIR/key.list.after"

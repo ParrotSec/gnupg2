@@ -1,0 +1,49 @@
+dirmngr (2.1.18-1) unstable; urgency=medium
+
+  If your machine is configured with system user session management,
+  dirmngr will be managed automatically by systemd's user sessions on
+  machines configured with use systemd.  Please consider installing the
+  packages that the dirmngr package Suggests:, and see
+  /usr/share/doc/dirmngr/README.Debian for more details.
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Mon, 23 Jan 2017 22:50:34 -0500
+
+dirmngr (2.1.13-3) experimental; urgency=medium
+
+  gpg and most related processes will auto-launch dirmngr if needed.
+
+  Any user who wants to launch dirmngr manually should do so with:
+
+     gpgconf --launch dirmngr
+
+  and may want to terminate dirmngr when their session ends with:
+
+     gpgconf --kill dirmngr
+
+  Users on machines with systemd can ensure that dirmngr is always
+  running for their session (and that it gets terminated at logout)
+  with:
+
+     gpgconf --kill dirmngr
+     systemctl --user enable dirmngr
+     systemctl --user start dirmngr
+
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 28 Jun 2016 17:55:15 -0400
+
+dirmngr (2.1.0~beta895-1) experimental; urgency=medium
+
+  No more dirmngr system service!
+  ===============================
+  
+  As of the 2.1.0 beta series, dirmngr is a local daemon that works
+  closely with gnupg2.  It is launched on its own, per-user, and
+  listens on a standard socket (usually ~/.gnupg/S.dirmngr).  There is
+  no more system-wide dirmngr process.
+
+  If there is a special case where a dirmngr system process is
+  actually needed, please report a bug in dirmngr, and we can sort out
+  a way to set one up for that case so that everyone with dirmngr
+  installed doesn't need to have it running.
+  
+ -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 07 Oct 2014 10:33:52 -0400
+

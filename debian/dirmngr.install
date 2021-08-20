@@ -1,0 +1,6 @@
+debian/tmp/usr/bin/dirmngr
+debian/tmp/usr/bin/dirmngr-client
+debian/tmp/usr/lib/gnupg/dirmngr_ldap
+debian/tmp/usr/share/gnupg/sks-keyservers.netCA.pem
+doc/examples/systemd-user/dirmngr.service usr/lib/systemd/user
+doc/examples/systemd-user/dirmngr.socket usr/lib/systemd/user

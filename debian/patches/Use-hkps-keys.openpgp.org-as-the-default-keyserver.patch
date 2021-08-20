@@ -1,0 +1,71 @@
+From: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Date: Thu, 11 Jul 2019 21:52:11 -0400
+Subject: Use hkps://keys.openpgp.org as the default keyserver
+
+As of 2.2.17, GnuPG will refuse to accept any third-party
+certifications from OpenPGP certificates pulled from the keyserver
+network.
+
+The SKS keyserver network currently has at least a dozen popular
+certificates which are flooded with enough unusable third-party
+certifications that they cannot be retrieved in any reasonable amount
+of time.
+
+The hkps://keys.openpgp.org keyserver installation offers HKPS,
+performs cryptographic validation, and by policy does not distribute
+third-party certifications anyway.
+
+It is not distributed or federated yet, unfortunately, but it is
+functional, which is more than can be said for the dying SKS pool.
+And given that GnuPG is going to reject all the third-party
+certifications anyway, there is no clear "web of trust" rationale for
+relying on the SKS pool.
+
+One sticking point is that keys.openpgp.org does not distribute user
+IDs unless the user has proven control of the associated e-mail
+address.  This means that on standard upstream GnuPG, retrieving
+revocations or subkey updates of those certificates will fail, because
+upstream GnuPG ignores any incoming certificate without a user ID,
+even if it knows a user ID in the local copy of the certificate (see
+https://dev.gnupg.org/T4393).
+
+However, we have three patches in
+debian/patches/import-merge-without-userid/ that together fix that
+bug.
+
+Signed-off-by: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+---
+ configure.ac     | 2 +-
+ doc/dirmngr.texi | 6 +++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4b9d908..47eb11c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1856,7 +1856,7 @@ AC_DEFINE_UNQUOTED(SCDAEMON_SOCK_NAME, "S.scdaemon",
+ AC_DEFINE_UNQUOTED(DIRMNGR_SOCK_NAME, "S.dirmngr",
+                    [The name of the dirmngr socket])
+ AC_DEFINE_UNQUOTED(DIRMNGR_DEFAULT_KEYSERVER,
+-                   "hkps://hkps.pool.sks-keyservers.net",
++                   "hkps://keys.openpgp.org",
+       [The default keyserver for dirmngr to use, if none is explicitly given])
+ 
+ AC_DEFINE_UNQUOTED(GPGEXT_GPG, "gpg", [The standard binary file suffix])
+diff --git a/doc/dirmngr.texi b/doc/dirmngr.texi
+index 84a8d28..603a11a 100644
+--- a/doc/dirmngr.texi
++++ b/doc/dirmngr.texi
+@@ -329,7 +329,11 @@ whether Tor is locally running or not.  The check for a running Tor is
+ done for each new connection.
+ 
+ If no keyserver is explicitly configured, dirmngr will use the
+-built-in default of @code{hkps://hkps.pool.sks-keyservers.net}.
++built-in default of @code{hkps://keys.openpgp.org}.
++
++Note that the above default is a Debian-specific choice.  Upstream
++GnuPG prefers @code{hkps://hkps.pool.sks-keyservers.net}.  See
++/usr/share/doc/gpgconf/NEWS.Debian.gz for more details.
+ 
+ Windows users with a keyserver running on their Active Directory
+ should use @code{ldap:///} for @var{name} to access this directory.

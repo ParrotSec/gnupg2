@@ -1,0 +1,3 @@
+debian/gpg-check-pattern.1
+debian/tmp/usr/share/man/man1/gpg-agent.1
+debian/tmp/usr/share/man/man1/gpg-preset-passphrase.1

@@ -1,0 +1,43 @@
+#!/usr/bin/dot
+
+# interrelationships between binary packages produced by gnupg2 source
+# package, if we were to move to the simplified package structure:
+
+# it would be good to graph the external dependencies as well.
+
+digraph gnupg2 {
+        # odd-duck packages:
+        node [shape=box];
+        gpgv_udeb [label="gpgv-udeb"];
+        gpgv_static [label="gpgv-static"];
+        gpgv_win32 [label="gpgv-win32"];
+
+        # meta-packages, transitional packages:
+        node [shape=diamond];
+        gnupg_agent [label="gnupg-agent"];
+        gnupg2;
+        gpgv2;
+        gpgsm;
+        dirmngr;
+        
+        node [shape=ellipse];
+        gnupg_l10n [label="gnupg-l10n"];
+        
+        # depends:
+        edge [color=black];
+        scdaemon -> gnupg;
+        gnupg2 -> gnupg;
+        gnupg_agent -> gnupg;
+        gpgsm -> gnupg;
+        dirmngr -> gnupg;
+        gpgv2 -> gpgv;
+
+        # recommends:
+        edge [color=red];
+        gnupg -> gnupg_l10n;
+        gnupg -> gpgv;
+        
+        # suggests:
+        edge [color=blue];
+        gpgv -> gnupg;
+}

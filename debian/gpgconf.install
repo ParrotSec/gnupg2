@@ -1,0 +1,3 @@
+debian/tmp/usr/bin/gpg-connect-agent
+debian/tmp/usr/bin/gpgconf
+debian/tmp/usr/share/gnupg/distsigkey.gpg

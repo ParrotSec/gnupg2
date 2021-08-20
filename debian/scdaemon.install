@@ -1,0 +1,2 @@
+debian/org.gnupg.scdaemon.metainfo.xml usr/share/metainfo
+debian/tmp/usr/lib/gnupg/scdaemon

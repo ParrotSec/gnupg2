@@ -1,0 +1,3 @@
+# gpgv-static is deliberately built statically.  We cannot avoid
+# embedding zlib.
+gpgv-static: embedded-library usr/bin/gpgv-static: zlib
